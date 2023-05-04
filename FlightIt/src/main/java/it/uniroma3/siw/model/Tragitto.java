@@ -6,6 +6,8 @@ import lombok.*;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tragitto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

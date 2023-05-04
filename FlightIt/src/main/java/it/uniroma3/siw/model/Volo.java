@@ -6,6 +6,8 @@ import lombok.*;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Volo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
