@@ -18,17 +18,22 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
+import static it.uniroma3.siw.model.Credentials.RUOLO_ADMIN;
+import static it.uniroma3.siw.model.Credentials.RUOLO_AUTORIZZATO;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
-    private UtenteOAuth2UserService utenteOAuth2UserService;
     /**
      * La sorgente dati (che contiene le credenziali) è
      * iniettata automaticamente
      */
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private UtenteOAuth2UserService utenteOAuth2UserService;
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -45,8 +50,10 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/", "/indexAutenticato", "/index").permitAll()
+                .requestMatchers(HttpMethod.GET, "/", "/index").permitAll()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers(HttpMethod.GET,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO)
+                .requestMatchers(HttpMethod.POST,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO)
                 .anyRequest().authenticated()
                 .and()
                 //Login
@@ -62,6 +69,7 @@ public class SecurityConfig {
                     .userInfoEndpoint()
                         .userService(utenteOAuth2UserService)
                     .and()
+                    .successHandler(oAuth2LoginSuccessHandler)
                     .defaultSuccessUrl("/success", true)
                 //Logout
                 .and()

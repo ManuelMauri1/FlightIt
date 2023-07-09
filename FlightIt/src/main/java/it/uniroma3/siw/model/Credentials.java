@@ -1,13 +1,16 @@
 package it.uniroma3.siw.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import it.uniroma3.siw.OAuth.AuthProvider;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.authentication.AuthenticationProvider;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Credentials {
     public static final String RUOLO_AUTORIZZATO = "AUTORIZZATO";
     public static final String RUOLO_ADMIN = "ADMIN";
@@ -18,4 +21,11 @@ public class Credentials {
     private String password;
     private String username;
     private String ruolo;
+
+    @OneToOne
+    private Utente utente;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="auth_provider")
+    private AuthProvider provider;
 }
