@@ -46,7 +46,7 @@ public class LogController {
     public String defaultAfterLogin(Model model){
         System.out.println("DEFAULT AFTER LOGIN");
         if(SecurityContextHolder.getContext().getAuthentication() instanceof OAuth2AuthenticationToken)
-            return "indexAutenticato";
+            return autenticato(model);
         else
             return index(model);
     }

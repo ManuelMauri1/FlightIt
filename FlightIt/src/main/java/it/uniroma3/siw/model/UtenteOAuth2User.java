@@ -2,7 +2,6 @@ package it.uniroma3.siw.model;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
@@ -26,4 +25,6 @@ public class UtenteOAuth2User implements OAuth2User{
     public String getName() {
         return auth2User.getAttribute("name");
     }
+
+    public String getLoginName(){return auth2User.getAttribute("login");}
 }
