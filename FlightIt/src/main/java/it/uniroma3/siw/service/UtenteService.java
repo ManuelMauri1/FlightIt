@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Service
 public class UtenteService {
     @Autowired
@@ -21,5 +23,11 @@ public class UtenteService {
     @Transactional
     public Utente saveUser(Utente user){
         return this.userRepository.save(user);
+    }
+    @Transactional
+    public Utente setNewUser(Utente utente, String dataN){
+        Utente utenteSettato = new Utente(utente.getNome(),utente.getCognome());
+        utenteSettato.setDataNascita(LocalDate.parse(dataN));
+        return utenteSettato;
     }
 }

@@ -94,26 +94,37 @@ public class LogController {
     }
 
     //Quando implemento /register mettere a provider LOCAL, se non ricordi vedi OAuth2LoginSuccessHandler/ CredentialsService saveCredentialsOAuthLogin
+    @GetMapping("/register")
+    public String registerForm(Model model){
+        System.out.println("REGISTER");
+        model.addAttribute("user", new Utente());
+        model.addAttribute("credentials", new Credentials());
+        return "formRegistrazione";
+    }
+
     @PostMapping( "/register" )
     public String registerUser(@Valid @ModelAttribute("user") Utente user,
                                BindingResult userBindingResult,
                                @Valid @ModelAttribute("credentials") Credentials credentials,
                                BindingResult credentialsBindingResult,
+                               @RequestParam("dataN")String dataN,
                                Model model) {
-        userValidator.validate(user, userBindingResult);
+        System.out.println("REGISTER");
+        Utente utenteDaVerificare = userService.setNewUser(user, dataN);
+        userValidator.validate(utenteDaVerificare, userBindingResult);
         credentialsValidator.validate(credentials, credentialsBindingResult);
         // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
         boolean userErrors = userBindingResult.hasErrors();
         boolean credentialsErrors = credentialsBindingResult.hasErrors();
         if(!userErrors && !credentialsErrors) {
-            userService.saveUser(user);
+            userService.saveUser(utenteDaVerificare);
             credentialsService.setUser(credentials, user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
         else
-            return "formRegisterUser";
+            return "formRegistrazione";
     }
 
 }
