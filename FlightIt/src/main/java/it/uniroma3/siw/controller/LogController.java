@@ -70,7 +70,7 @@ public class LogController {
                 userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 loginName = userDetails.getUsername();
             }
-            credentials = credentialsService.getCredentials(loginName);
+            credentials = credentialsService.getCredentialsByUsername(loginName);
 
             //Rimando al relativo index
             if (credentials.getRuolo().equals(Credentials.RUOLO_ADMIN))

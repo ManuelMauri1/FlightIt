@@ -5,7 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<h1>INDEX AUTENTICATO</h1>
+<h1>
+    INDEX AUTENTICATO
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+    </div>
+    <div th:if="${credentials}">
+        <span th:text="${credentials.getLoginName()}"></span>
+    </div>
+</h1>
 
 <a href="/logout">Logout</a>
 

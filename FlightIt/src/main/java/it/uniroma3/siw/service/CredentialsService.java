@@ -5,8 +5,6 @@ import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.repository.CredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +21,7 @@ public class CredentialsService {
     private UtenteService utenteService;
 
     @Transactional
-    public Credentials getCredentials(String username) {
+    public Credentials getCredentialsByUsername(String username) {
         Optional<Credentials> result = this.credentialsRepository.findByUsername(username);
         return result.orElse(null);
     }
