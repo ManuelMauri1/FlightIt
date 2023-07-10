@@ -118,9 +118,9 @@ public class LogController {
         boolean credentialsErrors = credentialsBindingResult.hasErrors();
         if(!userErrors && !credentialsErrors) {
             userService.saveUser(utenteDaVerificare);
-            credentialsService.setUser(credentials, user);
+            credentialsService.setUser(credentials, utenteDaVerificare);
             credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
+            model.addAttribute("user", utenteDaVerificare);
             return "registrationSuccessful";
         }
         else
