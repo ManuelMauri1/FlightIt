@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
 import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 
@@ -18,6 +19,8 @@ public class Utente {
 
     private String nome;
     private String cognome;
+
+    @PastOrPresent
     private LocalDate dataNascita;
 
     public Utente(String nome, String cognome){

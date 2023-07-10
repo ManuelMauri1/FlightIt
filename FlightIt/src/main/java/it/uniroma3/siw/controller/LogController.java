@@ -96,7 +96,7 @@ public class LogController {
     //Quando implemento /register mettere a provider LOCAL, se non ricordi vedi OAuth2LoginSuccessHandler/ CredentialsService saveCredentialsOAuthLogin
     @GetMapping("/register")
     public String registerForm(Model model){
-        System.out.println("REGISTER");
+        System.out.println("FORM REGISTER");
         model.addAttribute("user", new Utente());
         model.addAttribute("credentials", new Credentials());
         return "formRegistrazione";
