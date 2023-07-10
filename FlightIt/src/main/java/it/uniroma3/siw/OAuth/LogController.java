@@ -28,7 +28,6 @@ import java.util.Map;
 public class LogController {
     @Autowired
     private CredentialsService credentialsService;
-
     @GetMapping("/")
     public String index(Model model) {
         System.out.println("INDEX");

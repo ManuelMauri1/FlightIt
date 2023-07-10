@@ -30,7 +30,6 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         if(credentials == null) {
             System.out.println("ON AUTHENTICATION SUCCESS: NUOVO UTENTE");
             credentialsService.saveCredentialsOAuthLogin(loginName, displayName, AuthProvider.GITHUB);
-
         }
         else
             System.out.println("ON AUTHENTICATION SUCCESS: UTENTE ESISTENTE");

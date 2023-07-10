@@ -49,6 +49,7 @@ public class CredentialsService {
         utente.setNome(displayName);
         credentials.setUsername(loginName);
         credentials.setProvider(authenticationProvider);
+        credentials.setPassword("");
         setUser(credentials, utente);
         utenteService.saveUser(utente);
         System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
