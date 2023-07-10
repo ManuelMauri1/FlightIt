@@ -13,4 +13,5 @@ public class Utente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
+    private String cognome;
 }

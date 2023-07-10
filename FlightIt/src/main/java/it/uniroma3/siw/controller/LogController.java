@@ -1,4 +1,4 @@
-package it.uniroma3.siw.OAuth;
+package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Utente;
@@ -47,6 +47,12 @@ public class LogController {
         return "autenticato/indexAutenticato";
     }
 
+    @GetMapping("admin/indexAdmin")
+    public String admin(Model model) {
+        System.out.println("INDEX ADMIN");
+        return "admin/indexAdmin";
+    }
+
     @GetMapping("/success")
     public String defaultAfterLogin(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,22 +60,33 @@ public class LogController {
         if (authentication instanceof AnonymousAuthenticationToken)
             return login(model);
         else {
-            UserDetails userDetails = null; // (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Credentials credentials = null; //credentialsService.getCredentials(userDetails.getUsername());
-            UtenteOAuth2User auth2User = null; //(UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            UserDetails userDetails = null;
+            Credentials credentials = null;
+            UtenteOAuth2User auth2User = null;
+            String loginName = null;
 
+            //Come ha loggato?
             if (authentication instanceof OAuth2AuthenticationToken) {
                 auth2User = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                String loginName = auth2User.getLoginName();
+                loginName = auth2User.getLoginName();
                 credentials = credentialsService.getCredentials(loginName);
                 System.out.println("DEFAULT AFTER LOGIN: " + loginName + '\n' + "CREDENTIALS: " + credentials);
             }
-            if (credentials.getRuolo().equals(Credentials.RUOLO_AUTORIZZATO))
+            else{
+                userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                loginName = userDetails.getUsername();
+                credentials = credentialsService.getCredentials(loginName);
+                System.out.println("DEFAULT AFTER LOGIN: " + loginName + '\n' + "CREDENTIALS: " + credentials);
+            }
+
+            //Rimando al relativo index
+            if (credentials.getRuolo().equals(Credentials.RUOLO_ADMIN))
+                return admin(model);
+            else
                 return autenticato(model);
         }
-
-        return login(model);
     }
 
     //Quando implemento /register mettere a provider LOCAL, se non ricordi vedi OAuth2LoginSuccessHandler/ CredentialsService saveCredentialsOAuthLogin
+
 }
