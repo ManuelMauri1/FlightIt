@@ -1,11 +1,13 @@
 package it.uniroma3.siw.controller;
 
+import it.uniroma3.siw.controller.validator.CredentialsValidator;
+import it.uniroma3.siw.controller.validator.UtenteValidator;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.model.UtenteOAuth2User;
-import it.uniroma3.siw.repository.CredentialsRepository;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.UtenteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,10 +18,8 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Map;
@@ -28,6 +28,12 @@ import java.util.Map;
 public class LogController {
     @Autowired
     private CredentialsService credentialsService;
+    @Autowired
+    private UtenteService userService;
+    @Autowired
+    private UtenteValidator userValidator;
+    @Autowired
+    private CredentialsValidator credentialsValidator;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -88,5 +94,26 @@ public class LogController {
     }
 
     //Quando implemento /register mettere a provider LOCAL, se non ricordi vedi OAuth2LoginSuccessHandler/ CredentialsService saveCredentialsOAuthLogin
+    @PostMapping( "/register" )
+    public String registerUser(@Valid @ModelAttribute("user") Utente user,
+                               BindingResult userBindingResult,
+                               @Valid @ModelAttribute("credentials") Credentials credentials,
+                               BindingResult credentialsBindingResult,
+                               Model model) {
+        userValidator.validate(user, userBindingResult);
+        credentialsValidator.validate(credentials, credentialsBindingResult);
+        // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
+        boolean userErrors = userBindingResult.hasErrors();
+        boolean credentialsErrors = credentialsBindingResult.hasErrors();
+        if(!userErrors && !credentialsErrors) {
+            userService.saveUser(user);
+            credentialsService.setUser(credentials, user);
+            credentialsService.saveCredentials(credentials);
+            model.addAttribute("user", user);
+            return "registrationSuccessful";
+        }
+        else
+            return "formRegisterUser";
+    }
 
 }

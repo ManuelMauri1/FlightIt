@@ -55,4 +55,7 @@ public class CredentialsService {
         saveCredentials(credentials);
         System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
     }
+
+    @Transactional
+    public void saveCredentialsLocalLogin(){}
 }
