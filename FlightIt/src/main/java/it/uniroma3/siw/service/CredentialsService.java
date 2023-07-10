@@ -36,26 +36,37 @@ public class CredentialsService {
     }
 
     @Transactional
+    public void setProvider(Credentials credentials, AuthProvider provider){
+        credentials.setProvider(provider);
+    }
+
+    @Transactional
+    public void setUsername(Credentials credentials, String username){
+        credentials.setUsername(username);
+    }
+
+    @Transactional
     public void setUser(Credentials credentials, Utente user){
         credentials.setUtente(user);
     }
 
     @Transactional
-    public void saveCredentialsOAuthLogin(String loginName, String displayName, AuthProvider authenticationProvider){
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN");
+    public void saveCredentialsOAuthLogin(String loginName, String displayName, AuthProvider provider){
         Credentials credentials = new Credentials();
         Utente utente = new Utente();
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
-        utente.setNome(displayName);
-        credentials.setUsername(loginName);
-        credentials.setProvider(authenticationProvider);
+        utenteService.setNome(utente, displayName);
+        setUsername(credentials, loginName);
+        setProvider(credentials, provider);
         setUser(credentials, utente);
         utenteService.saveUser(utente);
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
         saveCredentials(credentials);
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
     }
 
     @Transactional
-    public void saveCredentialsLocalLogin(){}
+    public void saveCredentialsLocalLogin(Utente utente, Credentials credentials, AuthProvider provider){
+        utenteService.saveUser(utente);
+        setProvider(credentials, provider);
+        setUser(credentials, utente);
+        saveCredentials(credentials);
+    }
 }
