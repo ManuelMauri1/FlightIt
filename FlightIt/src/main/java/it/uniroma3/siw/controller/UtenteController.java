@@ -1,4 +1,4 @@
-package it.uniroma3.siw.OAuth;
+package it.uniroma3.siw.controller;
 
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

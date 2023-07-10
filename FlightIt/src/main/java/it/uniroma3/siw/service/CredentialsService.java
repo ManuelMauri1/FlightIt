@@ -23,7 +23,7 @@ public class CredentialsService {
     private UtenteService utenteService;
 
     @Transactional
-    public Credentials getCredentials(String username) {
+    public Credentials getCredentialsByUsername(String username) {
         Optional<Credentials> result = this.credentialsRepository.findByUsername(username);
         return result.orElse(null);
     }
@@ -36,23 +36,38 @@ public class CredentialsService {
     }
 
     @Transactional
+    public void setProvider(Credentials credentials, AuthProvider provider){
+        credentials.setProvider(provider);
+    }
+
+    @Transactional
+    public void setUsername(Credentials credentials, String username){
+        credentials.setUsername(username);
+    }
+
+    @Transactional
     public void setUser(Credentials credentials, Utente user){
         credentials.setUtente(user);
     }
 
     @Transactional
-    public void saveCredentialsOAuthLogin(String loginName, String displayName, AuthProvider authenticationProvider){
+    public void saveCredentialsOAuthLogin(String loginName, String displayName, AuthProvider provider){
         System.out.println("SAVE CREDENTIALS OAUTHLOGIN");
         Credentials credentials = new Credentials();
         Utente utente = new Utente();
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
-        utente.setNome(displayName);
-        credentials.setUsername(loginName);
-        credentials.setProvider(authenticationProvider);
-        credentials.setPassword("");
+        utenteService.setNome(utente, displayName);
+        setUsername(credentials, loginName);
+        setProvider(credentials, provider);
         setUser(credentials, utente);
         utenteService.saveUser(utente);
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
+        saveCredentials(credentials);
+    }
+
+    @Transactional
+    public void saveCredentialsLocalLogin(Utente utente, Credentials credentials, AuthProvider provider){
+        utenteService.saveUser(utente);
+        setProvider(credentials, provider);
+        setUser(credentials, utente);
         saveCredentials(credentials);
         System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
     }

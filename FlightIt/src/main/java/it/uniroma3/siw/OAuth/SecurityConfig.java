@@ -46,14 +46,15 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain configureLogin(HttpSecurity http) throws Exception {
-        System.out.println("FILTER CHAIN");
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/", "/index").permitAll()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                .requestMatchers(HttpMethod.GET,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO)
-                .requestMatchers(HttpMethod.POST,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO)
+                .requestMatchers(HttpMethod.GET, "/", "/index", "/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+                .requestMatchers(HttpMethod.GET,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO, RUOLO_ADMIN)
+                .requestMatchers(HttpMethod.POST,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO, RUOLO_ADMIN)
+                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(RUOLO_ADMIN)
+                .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(RUOLO_ADMIN)
                 .anyRequest().authenticated()
                 .and()
                 //Login
