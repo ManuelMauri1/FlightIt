@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <span th:if="${credentials}" th:text="${credentials.getUsername()} + ' ' + ${credentials.getRuolo()}"></span>
+    <a href="/logout">Logout</a>
+</header>
+<div>
+    <a href="/voli"> Tutti i voli</a>
+    <a href="admin/modificaVolo"> Modifica volo</a>
+</div>
+</body>
+</html>
