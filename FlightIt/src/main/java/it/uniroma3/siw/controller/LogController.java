@@ -80,6 +80,7 @@ public class LogController {
                 System.out.println("LOG IN LOCALE: " + loginName + ' ' + userDetails);
             }
             credentials = credentialsService.getCredentialsByUsername(loginName);
+            System.out.println("LOG COME: " + credentials);
 
             //Rimando al relativo index
             if (credentials.getRuolo().equals(Credentials.RUOLO_ADMIN))
