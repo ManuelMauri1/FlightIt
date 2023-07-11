@@ -91,17 +91,19 @@ public class LogController {
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("user", new Utente());
-        model.addAttribute("credentials", new Credentials());
+        model.addAttribute("credenziali", new Credentials());
         return "formRegistrazione";
     }
 
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("user") Utente user,
                                BindingResult userBindingResult,
-                               @Valid @ModelAttribute("credentials") Credentials credentials,
+                               @Valid @ModelAttribute("credenziali") Credentials credentials,
                                BindingResult credentialsBindingResult,
                                @RequestParam("dataN") String dataN,
                                Model model) {
+        System.out.println("NUOVE CREDENTIALS: " + credentials);
+        System.out.println(model.getAttribute("username") + " " + model.getAttribute("pwd"));
         userService.setUtente(user, dataN);
         userValidator.validate(user, userBindingResult);
         credentialsValidator.validate(credentials, credentialsBindingResult);
