@@ -31,6 +31,12 @@ public class LogController {
     @Autowired
     private CredentialsValidator credentialsValidator;
 
+
+    @ModelAttribute("credentials")
+    public void getCredentials(Model model, Credentials credentials) {
+        model.addAttribute("credentials", credentials);
+    }
+
     @GetMapping("/")
     public String index(Model model) {
         return "index";
@@ -48,8 +54,15 @@ public class LogController {
 
     @GetMapping("admin/indexAdmin")
     public String admin(Model model) {
+        UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials = credentialsService.getCredentialsByUsername(principal.getLoginName());
+        System.out.println("CREDENZIALI UTENTE: " + credentials);
+        System.out.println("CREDENZIALI: " + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+        getCredentials(model, credentials);
         return "admin/indexAdmin";
     }
+
 
     @GetMapping("/success")
     public String defaultAfterLogin(Model model) {
