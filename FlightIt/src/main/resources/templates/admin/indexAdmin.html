@@ -6,7 +6,7 @@
 </head>
 <body>
 <header>
-    <span th:if="${credentials}" th:text="${credentials.getUsername()} + ' ' + ${credentials.getRuolo()}"></span>
+    <span th:if="${credentials}" th:text="${credentials.username} "></span>
     <a href="/logout">Logout</a>
 </header>
 <div>
