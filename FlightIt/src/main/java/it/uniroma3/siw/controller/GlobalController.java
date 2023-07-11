@@ -34,7 +34,7 @@ public class GlobalController {
             System.out.println("CREDENZIALS: " + credentials);
             System.out.println("PRINCIPALS: " + principal.getAuthorities());
         }catch (ClassCastException e){
-            System.out.println("ERRORE: " + e);
+            System.out.println("ERROR: " + e);
         }
         return null;
     }
