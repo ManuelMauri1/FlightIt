@@ -49,7 +49,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/", "/index", "/register").permitAll()
+                .requestMatchers(HttpMethod.GET, "/", "/index", "/register","/css/**", "/images/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                 .requestMatchers(HttpMethod.GET,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO, RUOLO_ADMIN)
                 .requestMatchers(HttpMethod.POST,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO, RUOLO_ADMIN)
