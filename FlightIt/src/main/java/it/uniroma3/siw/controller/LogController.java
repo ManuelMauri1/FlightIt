@@ -31,12 +31,6 @@ public class LogController {
     @Autowired
     private CredentialsValidator credentialsValidator;
 
-
-    @ModelAttribute("credentials")
-    public void getCredentials(Model model, Credentials credentials) {
-        model.addAttribute("credentials", credentials);
-    }
-
     @GetMapping("/")
     public String index(Model model) {
         return "index";
@@ -59,7 +53,7 @@ public class LogController {
         System.out.println("CREDENZIALI UTENTE: " + credentials);
         System.out.println("PRINCIPAL: " + principal.getAuthorities());
 
-        getCredentials(model, credentials);
+       // getCredentials(model, credentials);
         return "admin/indexAdmin";
     }
 

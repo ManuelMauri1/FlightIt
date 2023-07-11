@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -24,6 +25,20 @@ public class GlobalController {
         }
         return user;
     }
+
+    @ModelAttribute("credentials")
+    public Credentials getCredentials() {
+        try {
+            UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Credentials credentials = credentialsService.getCredentialsByUsername(principal.getLoginName());
+            System.out.println("CREDENZIALS: " + credentials);
+            System.out.println("PRINCIPALS: " + principal.getAuthorities());
+        }catch (ClassCastException e){
+            System.out.println("ERRORE: " + e);
+        }
+        return null;
+    }
+
 
     @ModelAttribute("userDetail")
     public UserDetails getUtente() {
