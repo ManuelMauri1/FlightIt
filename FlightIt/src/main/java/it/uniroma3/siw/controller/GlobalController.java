@@ -26,15 +26,16 @@ public class GlobalController {
         return user;
     }
 
-    @ModelAttribute("credentials")
+    @ModelAttribute("authUser")
     public Credentials getCredentials() {
         try {
             UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Credentials credentials = credentialsService.getCredentialsByUsername(principal.getLoginName());
-            System.out.println("CREDENZIALS: " + credentials);
-            System.out.println("PRINCIPALS: " + principal.getAuthorities());
+            System.out.println("OAUTH CREDENZIALS: " + credentials);
+            System.out.println("OAUTH PRINCIPAL: " + principal.getAuthorities());
+            return credentials;
         }catch (ClassCastException e){
-            System.out.println("ERROR: " + e);
+            System.out.println("OAUTH ERRORE: " + e);
         }
         return null;
     }
@@ -42,13 +43,13 @@ public class GlobalController {
 
     @ModelAttribute("userDetail")
     public UserDetails getUtente() {
-        UserDetails userDetails = null;
         try {
-            userDetails = (UserDetails) getAuthenticatedUser();
-        } catch (ClassCastException e) {
+            UserDetails userDetails = (UserDetails) getAuthenticatedUser();
+            System.out.println("LOCAL PRINCIPAL: " + userDetails);
             return userDetails;
+        } catch (ClassCastException e) {
+            System.out.println("LOCAL ERRORE: " + e);
         }
-        System.out.println("LOCAL CREDENTIALS: " + (UserDetails) getAuthenticatedUser());
-        return userDetails;
+        return null;
     }
 }

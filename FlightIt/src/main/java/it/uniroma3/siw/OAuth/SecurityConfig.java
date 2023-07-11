@@ -45,6 +45,7 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain configureLogin(HttpSecurity http) throws Exception {
+        System.out.println("FILTER CHAIN: INIZIO");
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
@@ -74,6 +75,7 @@ public class SecurityConfig {
                 //Logout
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();
+        System.out.println("FILTER CHAIN: FINE");
         return http.build();
     }
 

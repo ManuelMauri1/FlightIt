@@ -73,9 +73,11 @@ public class LogController {
             if (authentication instanceof OAuth2AuthenticationToken) {
                 auth2User = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 loginName = auth2User.getLoginName();
+                System.out.println("LOG CON GITH: " + loginName + ' ' + auth2User);
             } else {
                 userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 loginName = userDetails.getUsername();
+                System.out.println("LOG IN LOCALE: " + loginName + ' ' + userDetails);
             }
             credentials = credentialsService.getCredentialsByUsername(loginName);
 

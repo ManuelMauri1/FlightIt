@@ -6,7 +6,7 @@
 </head>
 <body>
 <header>
-    <span th:if="${credentials}" th:text="${credentials.username} "></span>
+    <span th:if="${authUser}" th:text="${authUser.username} "></span>
     <a href="/logout">Logout</a>
 </header>
 <div>
