@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 public class Credentials {
     public static final String RUOLO_AUTORIZZATO = "AUTORIZZATO";
     public static final String RUOLO_ADMIN = "ADMIN";
+    public static final String OAUTH2_USER = "OAUTH2_USER";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

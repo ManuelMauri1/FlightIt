@@ -26,7 +26,7 @@ public class VoloController {
     public String modificaVolo(Model model){
         UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("CREDENZIALI UTENTE: " + credentialsService.getCredentialsByUsername(principal.getLoginName()));
-        return "/admin/modificaVolo.html";
+        return "admin/modificaVolo.html";
     }
 
     @GetMapping("/autenticato/volo")

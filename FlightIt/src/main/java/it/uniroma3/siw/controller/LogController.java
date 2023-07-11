@@ -57,7 +57,7 @@ public class LogController {
         UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Credentials credentials = credentialsService.getCredentialsByUsername(principal.getLoginName());
         System.out.println("CREDENZIALI UTENTE: " + credentials);
-        System.out.println("CREDENZIALI: " + SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        System.out.println("PRINCIPAL: " + principal.getAuthorities());
 
         getCredentials(model, credentials);
         return "admin/indexAdmin";
