@@ -1,6 +1,6 @@
 package it.uniroma3.siw.controller;
 
-import it.uniroma3.siw.model.UtenteOAuth2User;
+//import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.repository.VoloRepository;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.VoloService;
@@ -24,8 +24,8 @@ public class VoloController {
     }
     @GetMapping("/admin/modificaVolo")
     public String modificaVolo(Model model){
-        UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("CREDENZIALI UTENTE: " + credentialsService.getCredentialsByUsername(principal.getLoginName()));
+       // UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       // System.out.println("CREDENZIALI UTENTE: " + credentialsService.getCredentialsByUsername(principal.getLoginName()));
         return "admin/modificaVolo.html";
     }
 

@@ -53,7 +53,6 @@ public class LogController {
         System.out.println("CREDENZIALI UTENTE: " + credentials);
         System.out.println("PRINCIPAL: " + principal.getAuthorities());
 
-       // getCredentials(model, credentials);
         return "admin/indexAdmin";
     }
 
@@ -71,7 +70,7 @@ public class LogController {
 
             //Come ha loggato?
             if (authentication instanceof OAuth2AuthenticationToken) {
-                auth2User = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+               auth2User = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 loginName = auth2User.getLoginName();
                 System.out.println("LOG CON GITH: " + loginName + ' ' + auth2User);
             } else {

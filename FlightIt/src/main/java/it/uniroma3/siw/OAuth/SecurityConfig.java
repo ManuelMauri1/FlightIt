@@ -67,8 +67,7 @@ public class SecurityConfig {
                 //Login con Github
                 .oauth2Login()
                     .loginPage("/login")
-                    .userInfoEndpoint()
-                        .userService(utenteOAuth2UserService)
+                    .userInfoEndpoint().userService(utenteOAuth2UserService)
                     .and()
                     .successHandler(oAuth2LoginSuccessHandler)
                     .defaultSuccessUrl("/success", true)
