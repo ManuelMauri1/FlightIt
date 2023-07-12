@@ -37,7 +37,7 @@ public class LogController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        System.out.println("LOGIN");
+        System.out.println("LOG");
         return "formLogin";
     }
 
