@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="flightit@localhost" uuid="bb469b29-3626-4b0e-ad70-45e2a0a77a93">
+    <data-source source="LOCAL" name="flightIt@localhost" uuid="16d946a6-81d7-442e-9466-224aae16681a">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/flightit</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/flightIt</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
