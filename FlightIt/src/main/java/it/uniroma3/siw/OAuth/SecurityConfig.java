@@ -64,7 +64,7 @@ public class SecurityConfig {
                     .defaultSuccessUrl("/success", true)
                     .failureUrl("/login?error=true")
                 .and()
-                //Login con Github
+                //Login con GitHub
                 .oauth2Login()
                     .loginPage("/login")
                     .userInfoEndpoint().userService(utenteOAuth2UserService)
