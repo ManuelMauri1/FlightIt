@@ -34,9 +34,7 @@ public class CredentialsService {
         try {
             credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
         }
-        catch (Exception e ){
-
-        }
+        catch (Exception e ){}
         return this.credentialsRepository.save(credentials);
     }
 
