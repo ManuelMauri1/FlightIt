@@ -6,16 +6,8 @@
 </head>
 <body>
 <h1>
-    INDEX AUTENTICATO
-    <div th:if="${userDetails}">
-        <span th:text="${userDetails.username}"></span>
-    </div>
-    <div th:if="${credentials}">
-        <span th:text="${credentials.getLoginName()}"></span>
-    </div>
+    <a href="/logout">Logout</a>
 </h1>
-
-<a href="/logout">Logout</a>
-
+<a href="autenticato/volo">Volo</a>
 </body>
 </html>

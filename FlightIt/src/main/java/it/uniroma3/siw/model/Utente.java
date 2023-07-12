@@ -20,7 +20,6 @@ public class Utente {
     private String nome;
     private String cognome;
 
-    @PastOrPresent
     private LocalDate dataNascita;
 
     public Utente(String nome, String cognome){

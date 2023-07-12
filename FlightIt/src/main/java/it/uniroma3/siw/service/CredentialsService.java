@@ -31,7 +31,10 @@ public class CredentialsService {
     @Transactional
     public Credentials saveCredentials(Credentials credentials) {
         credentials.setRuolo(Credentials.RUOLO_AUTORIZZATO);
-        credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
+        try {
+            credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
+        }
+        catch (Exception e ){}
         return this.credentialsRepository.save(credentials);
     }
 

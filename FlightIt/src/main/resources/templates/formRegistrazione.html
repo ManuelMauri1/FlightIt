@@ -39,33 +39,36 @@
 
  -->
 
-<form th:action="@{/register}" method="POST" th:object="${credentials}">
+<form th:action="@{/register}" method="POST">
     <div>
         <div>
             <span>Registrazione </span>
-            <span th:if="${#fields.hasGlobalErrors()}">
-                <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">
-            </span>
         </div>
         <div>
-            <div>
-                <label class="line-username"> Username</label>
-                <input type="text" maxlength="30" class="username" required th:field="*{username}"/>
-                <span class="username" th:if="${#fields.hasErrors('username')}"
-                      th:errors="*{username}"
-                      th:style="'color:red'"> </span>
-            </div>
-            <div>
-                <label class="line-pwd" for="password"> Password</label>
-                <input type="password" maxlength="30" class="password" id="password" required th:field="*{password}"/>
-                <span>
+            <div th:object="${credenziali}">
+                <span th:if="${#fields.hasGlobalErrors()}">
+                    <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">
+                </span>
+                <div>
+                    <label class="line-username"> Username</label>
+                    <input type="text" maxlength="30" class="username" name="username" required
+                           th:field="*{username}"/>
+                    <span class="username" th:if="${#fields.hasErrors('username')}"
+                          th:errors="${credentials.username}"
+                          th:style="'color:red'"> </span>
+                </div>
+                <div>
+                    <label class="line-pwd" for="password"> Password</label>
+                    <input type="password" maxlength="30" class="password" id="password" name="pwd" required
+                           th:field="*{password}"/>
+                    <span>
                     <i id="eye-icon" class="bi bi-eye-slash-fill" onclick="mostraPassword()"></i>
                 </span>
-                <span class="password" th:if="${#fields.hasErrors('password')}"
-                      th:errors="${credentials.password}"
-                      th:style="'color:red'"></span>
+                    <span class="password" th:if="${#fields.hasErrors('password')}"
+                          th:errors="${credentials.password}"
+                          th:style="'color:red'"></span>
+                </div>
             </div>
-
             <div th:object="${user}">
                 <div th:if="${#fields.hasGlobalErrors()}">
                     <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">

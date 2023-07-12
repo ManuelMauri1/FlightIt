@@ -18,8 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
-import static it.uniroma3.siw.model.Credentials.RUOLO_ADMIN;
-import static it.uniroma3.siw.model.Credentials.RUOLO_AUTORIZZATO;
+import static it.uniroma3.siw.model.Credentials.*;
 
 @Configuration
 @EnableWebSecurity
@@ -46,15 +45,16 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain configureLogin(HttpSecurity http) throws Exception {
+        System.out.println("FILTER CHAIN: INIZIO");
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET, "/", "/index", "/register").permitAll()
+                .requestMatchers(HttpMethod.GET, "/", "/index", "/register","/css/**", "/images/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                .requestMatchers(HttpMethod.GET,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO, RUOLO_ADMIN)
-                .requestMatchers(HttpMethod.POST,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO, RUOLO_ADMIN)
-                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(RUOLO_ADMIN)
-                .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(RUOLO_ADMIN)
+                .requestMatchers(HttpMethod.GET,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO, RUOLO_ADMIN, OAUTH2_USER)
+                .requestMatchers(HttpMethod.POST,"/autenticato/**").hasAnyAuthority(RUOLO_AUTORIZZATO, RUOLO_ADMIN, OAUTH2_USER)
+                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(RUOLO_ADMIN, OAUTH2_USER)
+                .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(RUOLO_ADMIN, OAUTH2_USER)
                 .anyRequest().authenticated()
                 .and()
                 //Login
@@ -64,17 +64,17 @@ public class SecurityConfig {
                     .defaultSuccessUrl("/success", true)
                     .failureUrl("/login?error=true")
                 .and()
-                //Login con Github
+                //Login con GitHub
                 .oauth2Login()
                     .loginPage("/login")
-                    .userInfoEndpoint()
-                        .userService(utenteOAuth2UserService)
+                    .userInfoEndpoint().userService(utenteOAuth2UserService)
                     .and()
                     .successHandler(oAuth2LoginSuccessHandler)
-                    .defaultSuccessUrl("/success", true)
+                    //.defaultSuccessUrl("/success", true)
                 //Logout
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();
+        System.out.println("FILTER CHAIN: FINE");
         return http.build();
     }
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifica Volo</title>
+    <!--- Per l'icona --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <span th:if="${credentials}" th:text="${credentials.getUsername()} + ' ' + ${credentials.getRuolo()}"></span>
+        <a href="/logout">Logout</a>
+    <a href="/admin/indexAdmin" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+
+<h1>Film</h1>
+<!--div th:if="${movies.isEmpty()}">Non ci sono film nel sistema</div>
+
+<ul class="movie-list">
+    <li th:each="movie : ${movies}">
+        <div class="movie-card">
+            <div class="poster">
+                <div class="poster-image">
+                    <div class="poster2"></div>
+                    <img class="poster3" th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}"/>
+                </div>
+            </div>
+            <div>
+                <div th:href="@{'/movies' + '/' + ${movie.id}}"
+                     th:text="${movie.titolo} + ' (' + ${movie.anno} + ')'" class="movie">Nome (Anno)
+                </div>
+                <a th:href="@{'/admin/formUpdateMovie' + '/' + ${movie.id}}">Aggiorna</a>
+            </div>
+        </div>
+    </li>
+</ul-->
+<!-- La pagina conterrà delle form per modificare tutte le informazioni riguardanti un singolo volo.
+ le info sono le stesse conenute all'interno del dettagio volo, con l'aggiunta della modifica dell'orario.
+ Sotto le informazioni saranno presenti dei bottoni per confermare l'inserimento e uno per eliminare definitivamente il volo.
+ -->
+
+</body>
+</html>

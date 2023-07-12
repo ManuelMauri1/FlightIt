@@ -1,13 +1,14 @@
 package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Credentials;
-import it.uniroma3.siw.model.UtenteOAuth2User;
+//import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.service.CredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -16,7 +17,6 @@ public class GlobalController {
     @Autowired
     private CredentialsService credentialsService;
 
-    @ModelAttribute("credentials")
     private Object getAuthenticatedUser() {
         Object user = null;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -26,27 +26,30 @@ public class GlobalController {
         return user;
     }
 
-    @ModelAttribute("credentials")
-    public UtenteOAuth2User getUser() {
-        UtenteOAuth2User auth2User = null;
+    /*@ModelAttribute("authUser")
+    public Credentials getCredentials() {
         try {
-            auth2User = (UtenteOAuth2User) getAuthenticatedUser();
-        } catch (ClassCastException e) {
-            return auth2User;
+            UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Credentials credentials = credentialsService.getCredentialsByUsername(principal.getLoginName());
+            System.out.println("OAUTH CREDENZIALS: " + credentials);
+            System.out.println("OAUTH PRINCIPAL: " + principal.getAuthorities());
+            return credentials;
+        }catch (ClassCastException e){
+            System.out.println("OAUTH ERRORE: " + e);
         }
-        System.out.println("OAUTH CREDENTIALS: " + (UtenteOAuth2User) getAuthenticatedUser());
-        return auth2User;
+        return null;
     }
+
 
     @ModelAttribute("userDetail")
     public UserDetails getUtente() {
-        UserDetails userDetails = null;
         try {
-            userDetails = (UserDetails) getAuthenticatedUser();
-        } catch (ClassCastException e) {
+            UserDetails userDetails = (UserDetails) getAuthenticatedUser();
+            System.out.println("LOCAL PRINCIPAL: " + userDetails);
             return userDetails;
+        } catch (ClassCastException e) {
+            System.out.println("LOCAL ERRORE: " + e);
         }
-        System.out.println("LOCAL CREDENTIALS: " + (UserDetails) getAuthenticatedUser());
-        return userDetails;
-    }
+        return null;
+    }*/
 }
