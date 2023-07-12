@@ -70,7 +70,7 @@ public class SecurityConfig {
                     .userInfoEndpoint().userService(utenteOAuth2UserService)
                     .and()
                     .successHandler(oAuth2LoginSuccessHandler)
-                    //.defaultSuccessUrl("/success", true)
+                    .defaultSuccessUrl("/success", true)
                 //Logout
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();
