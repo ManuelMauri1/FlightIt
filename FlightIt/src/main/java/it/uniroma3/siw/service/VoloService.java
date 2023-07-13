@@ -20,12 +20,12 @@ public class VoloService {
     private VoloRepository voloRepository;
 
     @Transactional
-    public List<Volo> getVoli(){
+    public List<Volo> getVoli() {
         return voloRepository.findAll();
     }
 
     @Transactional
-    public void salvaVolo(Volo volo){
+    public void salvaVolo(Volo volo) {
         voloRepository.save(volo);
     }
 
@@ -37,12 +37,16 @@ public class VoloService {
     @Transactional
     public void salvaNuovoVolo(Volo volo, String aereoportoP, String aereoportoA,
                                LocalDate dataP, String oraP, String oraA) {
+        if (voloEsistente(volo.getCodiceVolo(), dataP)) {
+            volo.setCodiceVolo(Volo.generaCodiceVolo());
+        }
         volo.setAereoportoArrivo(aereoportoA);
         volo.setAereoportoPartenza(aereoportoP);
         volo.setDataPartenza(dataP);
         volo.setOraPartenza(parseOra(volo, oraP));
         volo.setOraArrivo(parseOra(volo, oraA));
         salvaVolo(volo);
+
     }
 
     private Time parseOra(Volo volo, String ora) {
@@ -56,8 +60,12 @@ public class VoloService {
         }
     }
 
+    public boolean voloEsistente(String codiceVolo, LocalDate dataP) {
+        return voloRepository.existsByCodiceVoloAndDataPartenza(codiceVolo, dataP);
+    }
+
     public void cancellaVoli(List<Long> voliId) {
-        for (Long voloId: voliId) {
+        for (Long voloId : voliId) {
             voloRepository.deleteById(voloId);
         }
     }
