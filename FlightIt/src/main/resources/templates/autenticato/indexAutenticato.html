@@ -5,9 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-<h1>
+<header>
+    <span th:if="${authUser}" th:text="${authUser.username} "></span>
+    <span th:if="${userDetails}" th:text="${userDetails.username} "></span>
     <a href="/logout">Logout</a>
-</h1>
+</header>
 <a href="autenticato/volo">Volo</a>
 </body>
 </html>

@@ -1,14 +1,13 @@
 package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.model.Credentials;
-//import it.uniroma3.siw.model.UtenteOAuth2User;
+import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.service.CredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -26,7 +25,7 @@ public class GlobalController {
         return user;
     }
 
-    /*@ModelAttribute("authUser")
+    @ModelAttribute("authUser")
     public Credentials getCredentials() {
         try {
             UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -41,7 +40,7 @@ public class GlobalController {
     }
 
 
-    @ModelAttribute("userDetail")
+    @ModelAttribute("userDetails")
     public UserDetails getUtente() {
         try {
             UserDetails userDetails = (UserDetails) getAuthenticatedUser();
@@ -51,5 +50,5 @@ public class GlobalController {
             System.out.println("LOCAL ERRORE: " + e);
         }
         return null;
-    }*/
+    }
 }
