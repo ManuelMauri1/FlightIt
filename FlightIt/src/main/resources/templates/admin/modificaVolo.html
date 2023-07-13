@@ -10,7 +10,7 @@
 <body>
 <header>
     <span th:if="${credentials}" th:text="${credentials.getUsername()} + ' ' + ${credentials.getRuolo()}"></span>
-        <a href="/logout">Logout</a>
+    <a href="/logout">Logout</a>
     <a href="/admin/indexAdmin" class="freccia-indietro">
         <i class="fas fa-arrow-left"></i>
         Torna indietro
@@ -24,18 +24,21 @@
  -->
 <div th:if="${voli.isEmpty()}">Non ci sono voli nel sistema</div>
 
-<ul>
-    <li th:each="volo : ${voli}">
-        <div>
+<form th:action="@{/admin/cancellaVoli}" method="post" th:object="${voli}">
+    <ul>
+        <li th:each="volo : ${voli}">
             <div>
-                <div th:text="${volo.aereoportoPartenza} + ' -> ' + ${volo.aereoportoArrivo}">
-                    Da -> A
+                <div>
+                    <div th:text="${volo.aereoportoPartenza} + ' -> ' + ${volo.aereoportoArrivo}">
+                        Da -> A
+                    </div>
+                        <input type="checkbox" name="elimina" th:value="${volo.id}">
                 </div>
-                <a th:href="@{'/admin/formUpdateMovie' + '/' + ${movie.id}}">Aggiorna</a>
             </div>
-        </div>
-    </li>
-</ul>
+        </li>
+    </ul>
 
+    <button type="submit">Elimina selezionati</button>
+</form>
 </body>
 </html>

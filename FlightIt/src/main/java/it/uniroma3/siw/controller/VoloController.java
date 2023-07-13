@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class VoloController {
@@ -36,16 +37,9 @@ public class VoloController {
     }
 
     /*ADMIN*/
-    @GetMapping("/admin/modificaVolo")
-    public String modificaVolo(Model model) {
-        UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("CREDENZIALI UTENTE: " + credentialsService.getCredentialsByUsername(principal.getLoginName()));
-        return "admin/modificaVolo.html";
-    }
 
     @GetMapping("/admin/formAggiungiVolo")
     public String formNuovoVolo(Model model) {
-        System.out.println("GET NUOVO VOLO");
         model.addAttribute("volo", voloService.nuovoVolo());
         return "admin/formAggiungiVolo.html";
     }
@@ -54,9 +48,20 @@ public class VoloController {
     public String nuovoVolo(@ModelAttribute("volo") Volo volo, @RequestParam("aereoportoP") String aereoportoP,
                             @RequestParam("aereoportoA") String aereoportoA, @RequestParam("dataP") LocalDate dataP,
                             @RequestParam("oraP") String oraP, @RequestParam("oraA") String oraA, Model model) {
-        System.out.println("POST NUOVO VOLO");
         voloService.salvaNuovoVolo(volo, aereoportoP, aereoportoA, dataP, oraP, oraA);
         return voli(model);
+    }
+
+    @GetMapping("/admin/modificaVolo")
+    public String modificaVolo(Model model) {
+        model.addAttribute("voli", voloService.getVoli());
+        return "admin/modificaVolo.html";
+    }
+
+    @PostMapping("/admin/cancellaVoli")
+    public String cancellaVoli(@RequestParam("elimina")List<Long> voliId, Model model){
+        voloService.cancellaVoli(voliId);
+        return modificaVolo(model);
     }
 
     /*LOGGATI*/

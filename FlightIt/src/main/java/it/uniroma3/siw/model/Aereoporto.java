@@ -16,4 +16,5 @@ public class Aereoporto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String nome;
 }

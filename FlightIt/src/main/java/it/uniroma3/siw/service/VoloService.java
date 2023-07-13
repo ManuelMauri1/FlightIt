@@ -40,12 +40,12 @@ public class VoloService {
         volo.setAereoportoArrivo(aereoportoA);
         volo.setAereoportoPartenza(aereoportoP);
         volo.setDataPartenza(dataP);
-        volo.setOraPartenza(ParseOra(volo, oraP));
-        volo.setOraArrivo(ParseOra(volo, oraA));
+        volo.setOraPartenza(parseOra(volo, oraP));
+        volo.setOraArrivo(parseOra(volo, oraA));
         salvaVolo(volo);
     }
 
-    private Time ParseOra(Volo volo, String ora) {
+    private Time parseOra(Volo volo, String ora) {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm");
         try {
             Date parsedDate = dateFormat.parse(ora);
@@ -53,6 +53,12 @@ public class VoloService {
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void cancellaVoli(List<Long> voliId) {
+        for (Long voloId: voliId) {
+            voloRepository.deleteById(voloId);
         }
     }
 }
