@@ -56,7 +56,6 @@ public class VoloController {
                             @RequestParam("oraP") String oraP, @RequestParam("oraA") String oraA, Model model) {
         System.out.println("POST NUOVO VOLO");
         voloService.salvaNuovoVolo(volo, aereoportoP, aereoportoA, dataP, oraP, oraA);
-        voloService.salvaVolo(volo);
         return voli(model);
     }
 
