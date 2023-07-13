@@ -55,27 +55,7 @@ public class VoloController {
                             @RequestParam("aereoportoA") String aereoportoA, @RequestParam("dataP") LocalDate dataP,
                             @RequestParam("oraP") String oraP, @RequestParam("oraA") String oraA, Model model) {
         System.out.println("POST NUOVO VOLO");
-        //voloService.salvaNuovoVolo(volo, aereoportoP, aereoportoA, dataP, oraP, oraA);
-        volo.setAereoportoArrivo(aereoportoA);
-        volo.setAereoportoPartenza(aereoportoP);
-        volo.setDataPartenza(dataP);
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        try {
-            Date parsedDate = dateFormat.parse(oraP);
-            Time time = new Time(parsedDate.getTime());
-            volo.setOraPartenza(time);
-            System.out.println("ORA PARTENZA:" + time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        try {
-            Date parsedDate = dateFormat.parse(oraA);
-            Time time = new Time(parsedDate.getTime());
-            volo.setOraArrivo(time);
-            System.out.println("ORA ARRIVO:" + time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        voloService.salvaNuovoVolo(volo, aereoportoP, aereoportoA, dataP, oraP, oraA);
         voloService.salvaVolo(volo);
         return voli(model);
     }

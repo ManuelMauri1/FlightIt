@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,12 +36,23 @@ public class VoloService {
 
     @Transactional
     public void salvaNuovoVolo(Volo volo, String aereoportoP, String aereoportoA,
-                               String dataP, String oraP, String oraA) {
+                               LocalDate dataP, String oraP, String oraA) {
         volo.setAereoportoArrivo(aereoportoA);
         volo.setAereoportoPartenza(aereoportoP);
-        volo.setDataPartenza(LocalDate.parse(dataP));
-        volo.setOraPartenza(Time.valueOf(oraP));
-        volo.setOraArrivo(Time.valueOf(oraA));
+        volo.setDataPartenza(dataP);
+        volo.setOraPartenza(ParseOra(volo, oraP));
+        volo.setOraArrivo(ParseOra(volo, oraA));
         salvaVolo(volo);
+    }
+
+    private Time ParseOra(Volo volo, String ora) {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        try {
+            Date parsedDate = dateFormat.parse(ora);
+            return new Time(parsedDate.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
