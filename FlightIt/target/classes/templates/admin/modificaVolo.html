@@ -17,31 +17,25 @@
     </a>
 </header>
 
-<h1>Film</h1>
-<!--div th:if="${movies.isEmpty()}">Non ci sono film nel sistema</div>
+<h1>VOLI</h1>
+<!-- La pagina conterrà delle form per modificare tutte le informazioni riguardanti un singolo volo.
+ le info sono le stesse conenute all'interno del dettagio volo, con l'aggiunta della modifica dell'orario.
+ Sotto le informazioni saranno presenti dei bottoni per confermare l'inserimento e uno per eliminare definitivamente il volo.
+ -->
+<div th:if="${voli.isEmpty()}">Non ci sono voli nel sistema</div>
 
-<ul class="movie-list">
-    <li th:each="movie : ${movies}">
-        <div class="movie-card">
-            <div class="poster">
-                <div class="poster-image">
-                    <div class="poster2"></div>
-                    <img class="poster3" th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}"/>
-                </div>
-            </div>
+<ul>
+    <li th:each="volo : ${voli}">
+        <div>
             <div>
-                <div th:href="@{'/movies' + '/' + ${movie.id}}"
-                     th:text="${movie.titolo} + ' (' + ${movie.anno} + ')'" class="movie">Nome (Anno)
+                <div th:text="${volo.aereoportoPartenza} + ' -> ' + ${volo.aereoportoArrivo}">
+                    Da -> A
                 </div>
                 <a th:href="@{'/admin/formUpdateMovie' + '/' + ${movie.id}}">Aggiorna</a>
             </div>
         </div>
     </li>
-</ul-->
-<!-- La pagina conterrà delle form per modificare tutte le informazioni riguardanti un singolo volo.
- le info sono le stesse conenute all'interno del dettagio volo, con l'aggiunta della modifica dell'orario.
- Sotto le informazioni saranno presenti dei bottoni per confermare l'inserimento e uno per eliminare definitivamente il volo.
- -->
+</ul>
 
 </body>
 </html>
