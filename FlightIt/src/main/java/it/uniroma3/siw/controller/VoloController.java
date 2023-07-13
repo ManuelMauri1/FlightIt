@@ -18,11 +18,14 @@ public class VoloController {
     @Autowired
     private CredentialsService credentialsService;
 
+    /*NON LOGGATI*/
     @GetMapping("/voli")
     public String voli(Model model){
         model.addAttribute("voli", voloService.getVoli());
         return "voli.html";
     }
+
+    /*ADMIN*/
     @GetMapping("/admin/modificaVolo")
     public String modificaVolo(Model model){
         UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -30,6 +33,13 @@ public class VoloController {
         return "admin/modificaVolo.html";
     }
 
+    @GetMapping("/admin/formAggiungiVolo")
+    public String formNuovoVolo(Model model){
+        model.addAttribute("volo", voloService.nuovoVolo());
+        return "admin/formAggiungiVolo.html";
+    }
+
+    /*LOGGATI*/
     @GetMapping("/autenticato/volo")
     public String volo(Model model){
         return "/autenticato/volo";

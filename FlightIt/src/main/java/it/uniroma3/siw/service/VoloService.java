@@ -17,4 +17,8 @@ public class VoloService {
     public List<Volo> getVoli(){
         return voloRepository.findAll();
     }
+
+    public Volo nuovoVolo() {
+        return new Volo();
+    }
 }
