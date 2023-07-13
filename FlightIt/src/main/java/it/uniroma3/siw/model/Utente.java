@@ -19,7 +19,6 @@ public class Utente {
 
     private String nome;
     private String cognome;
-
     private LocalDate dataNascita;
 
     public Utente(String nome, String cognome){
