@@ -16,28 +16,21 @@
     Se sei admin, verrà mostrato anche il bottone "Modifica" per modificare il volo
 -->
 
-<div th:if="${volo}" class="box-container" th:object="${volo}">
-    <div class="container">
+<div th:if="${volo}" th:object="${volo}">
+    <div>
         <h1 th:text=" 'Codice volo: ' + *{codiceVolo}"></h1>
         <div>
             Aereoporto di imbarco:
             <span th:text="*{aereoportoPartenza}"></span>
         </div>
         <div>
-            Regista:
-            <span th:if="*{regista}"
-                  th:text="${movie.regista.nome} + ' ' + ${movie.regista.cognome}"> regista </span>
-            <span th:unless="*{regista}"> Nessun regista </span>
+            Aereoporto di sbarco:
+            <span th:text="*{aereoportoArrivo}"></span>
         </div>
         <div>
-            Attori: <span th:if="*{attori.isEmpty()}"> Non ci sono attori </span>
-            <div>
-                <ul>
-                    <li th:each="movieActor : ${movie.attori}">
-                        <span th:text="${movieActor.nome} + ' ' + ${movieActor.cognome}">Nome Cognome</span>
-                    </li>
-                </ul>
-            </div>
+            Data: <span th:text="*{dataPartenza}"></span>
+            Ora d'imbarco: <span th:text="*{oraPartenza}"></span>
+            Ora di sbarco: <span th:text="*{oraArrivo}"></span>
         </div>
     </div>
 </div>

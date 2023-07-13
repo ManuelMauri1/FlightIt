@@ -69,4 +69,8 @@ public class VoloService {
             voloRepository.deleteById(voloId);
         }
     }
+
+    public Volo getVolo(Long id) {
+        return voloRepository.findById(id).get();
+    }
 }

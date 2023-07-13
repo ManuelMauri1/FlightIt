@@ -17,7 +17,8 @@ mostrato il filtro figo per la decisione delle destinazioni. in fondo la lista m
 <ul class="movie-list">
     <li th:each="volo : ${voli}" >
         <div class="movie-card">
-            <a th:text="${volo.aereoportoPartenza} + ' -> ' + ${volo.aereoportoArrivo}" class="volo">Da -> A</a>
+            <a th:href="@{'autenticato/volo' + '/' + ${volo.id}}"
+               th:text="${volo.aereoportoPartenza} + ' -> ' + ${volo.aereoportoArrivo}" class="volo">Da -> A</a>
         </div>
 
     </li>

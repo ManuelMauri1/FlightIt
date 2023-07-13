@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
 import java.text.DateFormat;
@@ -67,8 +64,9 @@ public class VoloController {
     }
 
     /*LOGGATI*/
-    @GetMapping("/autenticato/volo")
-    public String volo(Model model) {
+    @GetMapping("/autenticato/volo/{id}")
+    public String volo(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("volo", voloService.getVolo(id));
         return "/autenticato/volo";
     }
 
