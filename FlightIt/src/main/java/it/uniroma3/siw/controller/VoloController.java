@@ -3,6 +3,7 @@ package it.uniroma3.siw.controller;
 import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.model.Volo;
 import it.uniroma3.siw.repository.VoloRepository;
+import it.uniroma3.siw.service.AereoportoService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.VoloService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class VoloController {
     @Autowired
     private VoloService voloService;
     @Autowired
-    private CredentialsService credentialsService;
+    private AereoportoService aereoportoService;
 
     /*NON LOGGATI*/
     @GetMapping("/voli")
@@ -41,6 +42,7 @@ public class VoloController {
     @GetMapping("/admin/formAggiungiVolo")
     public String formNuovoVolo(Model model) {
         model.addAttribute("volo", voloService.nuovoVolo());
+        model.addAttribute("aereoporti", aereoportoService.getAereoporti());
         return "admin/formAggiungiVolo.html";
     }
 

@@ -14,8 +14,11 @@ Sotto le form sarà presente un bottone per confermare l'inserimento o per annul
         <span>
             <input type="text" name="aereoportoP" list="imbarchi"/>
             <datalist id="imbarchi">
-                <option value="Fiumicino">
-                <option value="Malpensa">
+                <ul>
+                    <li th:each="aereoporto : ${aereoporti}">
+                        <option th:value="${aereoporto.nome}">
+                    </li>
+                </ul>
             </datalist>
         </span>
     </div>
@@ -23,10 +26,12 @@ Sotto le form sarà presente un bottone per confermare l'inserimento o per annul
         <label> Aereoporto di arrivo </label>
         <span>
             <input type="text" name="aereoportoA" list="sbarchi"/>
-            <datalist id="sbarchi">
-                <option value="Fiumicino">
-                <option value="Ciampino">
-                <option value="Malpensa">
+             <datalist id="sbarchi">
+                <ul>
+                    <li th:each="aereoporto : ${aereoporti}">
+                        <option th:value="${aereoporto.nome}">
+                    </li>
+                </ul>
             </datalist>
         </span>
     </div>
