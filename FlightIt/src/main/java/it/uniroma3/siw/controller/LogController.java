@@ -48,11 +48,6 @@ public class LogController {
 
     @GetMapping("admin/indexAdmin")
     public String admin(Model model) {
-        UtenteOAuth2User principal = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentialsByUsername(principal.getLoginName());
-        System.out.println("CREDENZIALI UTENTE: " + credentials);
-        System.out.println("PRINCIPAL: " + principal.getAuthorities());
-
         return "admin/indexAdmin";
     }
 
@@ -72,14 +67,11 @@ public class LogController {
             if (authentication instanceof OAuth2AuthenticationToken) {
                auth2User = (UtenteOAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 loginName = auth2User.getLoginName();
-                System.out.println("LOG CON GITH: " + loginName + ' ' + auth2User);
             } else {
                 userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                 loginName = userDetails.getUsername();
-                System.out.println("LOG IN LOCALE: " + loginName + ' ' + userDetails);
             }
             credentials = credentialsService.getCredentialsByUsername(loginName);
-            System.out.println("LOG COME: " + credentials);
 
             //Rimando al relativo index
             if (credentials.getRuolo().equals(Credentials.RUOLO_ADMIN))
@@ -104,8 +96,6 @@ public class LogController {
                                BindingResult credentialsBindingResult,
                                @RequestParam("dataN") String dataN,
                                Model model) {
-        System.out.println("NUOVE CREDENTIALS: " + credentials);
-        System.out.println(model.getAttribute("username") + " " + model.getAttribute("pwd"));
         userService.setUtente(user, dataN);
         userValidator.validate(user, userBindingResult);
         credentialsValidator.validate(credentials, credentialsBindingResult);

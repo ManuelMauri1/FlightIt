@@ -22,15 +22,10 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
         UtenteOAuth2User auth2User = (UtenteOAuth2User) authentication.getPrincipal();
         String loginName = auth2User.getLoginName();
         String displayName = auth2User.getName();
-        System.out.println("ON AUTHENTICATION SUCCESS: UTENTE " + auth2User.getLoginName() + ' ' + auth2User.getName());
         Credentials credentials = credentialsService.getCredentialsByUsername(loginName);
         if(credentials == null) {
-            System.out.println("ON AUTHENTICATION SUCCESS: NUOVO UTENTE");
             credentialsService.saveCredentialsOAuthLogin(loginName, displayName, AuthProvider.GITHUB);
         }
-        else
-            System.out.println("ON AUTHENTICATION SUCCESS: UTENTE ESISTENTE");
-
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }
