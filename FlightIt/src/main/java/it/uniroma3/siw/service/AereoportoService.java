@@ -23,11 +23,16 @@ public class AereoportoService {
     }
 
     @Transactional
+    public void aggiungiVolo(Volo volo, String aereoportoA, String aereoportoP) {
+        aggiungiVoloInEntrata(volo, aereoportoA);
+        aggiungiVoloInUscita(volo, aereoportoP);
+    }
+
     public void aggiungiVoloInEntrata(Volo volo, String aereoportoA) {
         getAereoportoByNome(aereoportoA).getVoliInEntrata().add(volo);
     }
 
-    @Transactional
+
     public void aggiungiVoloInUscita(Volo volo, String aereoportoP) {
         getAereoportoByNome(aereoportoP).getVoliInUscita().add(volo);
     }
@@ -48,4 +53,5 @@ public class AereoportoService {
     public void eliminaVoloInUscita(Volo volo, Aereoporto aereoportoP) {
         aereoportoP.getVoliInUscita().remove(volo);
     }
+
 }

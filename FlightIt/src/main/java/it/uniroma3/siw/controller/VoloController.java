@@ -50,8 +50,7 @@ public class VoloController {
                             @RequestParam("aereoportoA") String aereoportoA, @RequestParam("dataP") LocalDate dataP,
                             @RequestParam("oraP") String oraP, @RequestParam("oraA") String oraA, Model model) {
         voloService.salvaNuovoVolo(volo, aereoportoP, aereoportoA, dataP, oraP, oraA);
-        aereoportoService.aggiungiVoloInEntrata(volo, aereoportoA);
-        aereoportoService.aggiungiVoloInUscita(volo, aereoportoP);
+        aereoportoService.aggiungiVolo(volo, aereoportoA, aereoportoP);
         return volo(volo.getId(), model);
     }
 
