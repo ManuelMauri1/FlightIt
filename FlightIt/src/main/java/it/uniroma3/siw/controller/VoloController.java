@@ -63,7 +63,7 @@ public class VoloController {
     }
 
     @PostMapping("/admin/cancellaVoli")
-    public String cancellaVoli(@RequestParam("elimina")List<Long> voliId, Model model){
+    public String cancellaVoli(@RequestParam("elimina") List<Long> voliId, Model model) {
         aereoportoService.cancellaVoli(voloService.getVoliDaId(voliId));
         voloService.cancellaVoli(voliId);
         return modificaVolo(model);
@@ -76,10 +76,17 @@ public class VoloController {
         return "/autenticato/volo";
     }
 
-    @GetMapping("/voli/addPreferiti/{idVolo}")
-    public String addPreferiti(@PathVariable("idVolo")Long idVolo, Model model){
-       //Volo volo = voloService.getVolo(idVolo);
-       //utenteService.addVoloPreferiti(volo);
-        return voli(model);
+    @GetMapping("/autenticato/voli")
+    public String voliAutenticato(Model model){
+        System.out.println("VOLI AUTENTICATO");
+        model.addAttribute("voli", voloService.getVoli());
+        return "autenticato/voliAutenticato";
+    }
+
+    @GetMapping("/autenticato/voli/addPreferiti/{idVolo}")
+    public String addPreferiti(@PathVariable("idVolo") Long idVolo, Model model) {
+        Volo volo = voloService.getVolo(idVolo);
+        utenteService.addVoloPreferiti(volo);
+        return voliAutenticato(model);
     }
 }

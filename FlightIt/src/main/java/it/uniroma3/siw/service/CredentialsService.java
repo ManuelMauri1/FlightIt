@@ -55,7 +55,6 @@ public class CredentialsService {
 
     @Transactional
     public void saveCredentialsOAuthLogin(String loginName, String displayName, AuthProvider provider){
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN");
         Credentials credentials = new Credentials();
         Utente utente = new Utente();
         utenteService.setNome(utente, displayName);
@@ -72,6 +71,5 @@ public class CredentialsService {
         setProvider(credentials, provider);
         setUser(credentials, utenteSalvato);
         saveCredentials(credentials);
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utenteSalvato);
     }
 }
