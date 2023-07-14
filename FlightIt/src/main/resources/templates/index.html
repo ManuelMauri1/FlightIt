@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="/css/style.css?" rel="stylesheet"/>
+    <link href="/css/styleHomepage.css?" rel="stylesheet"/>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,10 +35,10 @@
             <div class="mr-auto"></div>
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="/index">Home<span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="/movies">Film</a>
-                <a class="nav-item nav-link" href="/artists">Artisti</a>
+                <a class="nav-item nav-link" href="/voli">Voli</a>
+                <a class="nav-item nav-link" href="/...">Profilo</a> <!-- aggiungere link al profilo -->
                     <div class="nav-item log-btn">
-                        <a class="btn btn-success my-2 my-sm-0" type="submit" href="/login">Login
+                        <a class="btn btn-success my-2 my-sm-0" type="submit" href="/formLogin">Login
                         </a>
                     </div>
             </div>
@@ -46,8 +46,11 @@
     </nav>
     <div class="container text-center">
         <div class="row">
-            <div class="col-md-7 col-sm-12 animate__animated animate__fadeInLeftBig">
-                <div class="panel panel-default">
+            <div class="col-md-5 col-sm-12 h-25 animate__animated animate__fadeInLeftBig">
+                <img class="px-3" id="img" src="/images/airplane.png" alt="Cinema"/>
+            </div>
+            <div class="col-md-7 col-sm-12 animate__animated animate__fadeInRightBig">
+                <div class="panel panel-default px-3">
                     <h1>Benvenuto in SiwMovie</h1>
                     <p>
                         Listen, I'm not the nicest guy in the universe, because I'm the smartest, and being nice is
@@ -60,14 +63,10 @@
                     </p>
                     <div class="bottoni-principali">
                     <span>
-                        <a class="btn px-5 py-2 primary-btn" href="/movies">Lista film</a>
-                        <a class="btn px-5 py-2 primary-btn" href="/artists">Lista artisti</a>
+                        <a class="btn px-5 py-2 primary-btn" href="/movies">Lista Voli</a>
                     </span>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-5 col-sm-12 h-25 animate__animated animate__fadeInRightBig">
-                <img id="img" src="/images/SalaCinema.png" alt="Cinema"/>
             </div>
         </div>
     </div>

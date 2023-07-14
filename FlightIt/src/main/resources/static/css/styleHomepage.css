@@ -8,7 +8,6 @@
 
 header,
 section {
-    overflow-x: hidden;
 }
 
 :root {
@@ -19,7 +18,7 @@ section {
     --Rubik: 'Rubik', sans-serif;
     --light-black: #2e2c2caf;
     --light-gray: rgba(255, 255, 255, 0.6);
-    --bggradient: linear-gradient(to left top, #1be157, #47eb8f, #75f4bb, #a8fadd, #ddfdf5);
+    --bggradient: linear-gradient(to right top, #2e2c2c, #5c3d39, #88503e, #af693b, #cf8730, #d99828, #e0aa1e, #e4bd0f, #e0c012, #dcc416, #d7c71a, #d3ca1f);
     --btn-color: radial-gradient(circle, #29bb7b, #36c687, #42d292, #4edd9e, #59e9aa);
 }
 
@@ -70,20 +69,18 @@ header .navbar-brand {
 }
 
 header .row .col-md-7 {
-    padding: 18.2vmin 1vmin;
-    padding-right: 15.5vmin;
+    padding: 18.2vmin 0 18.2vmin 22.5vmin;
     --animate-repeat: 1;
 
 }
 
 header .row .col-md-5 {
-    padding: 20.2vmin 3vmin;
-    padding-bottom: 30vmin;
+    padding: 28.2vmin 15.5vmin 20vmin 0;
     --animate-repeat: 1;
 }
 
 header .row .col-md-5 img {
-    width: 150%;
+    width: 200%;
 }
 
 header .row .col-md-7 h1 {
