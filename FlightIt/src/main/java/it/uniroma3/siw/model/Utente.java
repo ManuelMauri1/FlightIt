@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,6 +21,9 @@ public class Utente {
     private String nome;
     private String cognome;
     private LocalDate dataNascita;
+
+    @OneToMany
+    private List<Volo> preferiti;
 
     public Utente(String nome, String cognome){
         setNome(nome);
