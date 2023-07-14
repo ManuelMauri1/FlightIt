@@ -68,10 +68,10 @@ public class CredentialsService {
 
     @Transactional
     public void saveCredentialsLocalLogin(Utente utente, Credentials credentials, AuthProvider provider){
-        utenteService.saveUser(utente);
+        Utente utenteSalvato = utenteService.saveUser(utente);
         setProvider(credentials, provider);
-        setUser(credentials, utente);
+        setUser(credentials, utenteSalvato);
         saveCredentials(credentials);
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
+        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utenteSalvato);
     }
 }
