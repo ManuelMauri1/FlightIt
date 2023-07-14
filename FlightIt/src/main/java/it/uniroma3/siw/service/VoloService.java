@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -75,5 +76,13 @@ public class VoloService {
 
     public Volo getVolo(Long id) {
         return voloRepository.findById(id).get();
+    }
+
+    public List<Volo> getVoliDaId(List<Long> voliId) {
+        List<Volo> voli = new ArrayList<>();
+        for (Long voloId : voliId) {
+            voli.add(getVolo(voloId));
+        }
+        return voli;
     }
 }

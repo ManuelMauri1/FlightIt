@@ -14,23 +14,38 @@ public class AereoportoService {
     @Autowired
     private AereoportoRepository aereoportoRepository;
 
-    public Aereoporto getAereoportoByNome(String nomeAereoporto){
+    public Aereoporto getAereoportoByNome(String nomeAereoporto) {
         return aereoportoRepository.findByNome(nomeAereoporto);
     }
 
-    @Transactional
-    public List<Aereoporto> getAereoporti(){
+    public List<Aereoporto> getAereoporti() {
         return aereoportoRepository.findAll();
     }
 
     @Transactional
     public void aggiungiVoloInEntrata(Volo volo, String aereoportoA) {
-        Aereoporto aereoporto = getAereoportoByNome(aereoportoA);
-        aereoporto.getVoliInEntrata().add(volo);
+        getAereoportoByNome(aereoportoA).getVoliInEntrata().add(volo);
     }
 
     @Transactional
     public void aggiungiVoloInUscita(Volo volo, String aereoportoP) {
         getAereoportoByNome(aereoportoP).getVoliInUscita().add(volo);
+    }
+
+    @Transactional
+    public void cancellaVoli(List<Volo> voliDaId) {
+        for (Volo volo : voliDaId) {
+            eliminaVoloInUscita(volo, volo.getAereoportoPartenza());
+            eliminaVoloInEntrata(volo, volo.getAereoportoArrivo());
+        }
+    }
+
+
+    public void eliminaVoloInEntrata(Volo volo, Aereoporto aereoportoA) {
+        aereoportoA.getVoliInEntrata().remove(volo);
+    }
+
+    public void eliminaVoloInUscita(Volo volo, Aereoporto aereoportoP) {
+        aereoportoP.getVoliInUscita().remove(volo);
     }
 }

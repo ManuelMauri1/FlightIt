@@ -63,6 +63,7 @@ public class VoloController {
 
     @PostMapping("/admin/cancellaVoli")
     public String cancellaVoli(@RequestParam("elimina")List<Long> voliId, Model model){
+        aereoportoService.cancellaVoli(voloService.getVoliDaId(voliId));
         voloService.cancellaVoli(voliId);
         return modificaVolo(model);
     }
