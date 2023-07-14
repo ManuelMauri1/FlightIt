@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Patua+One&family=Rubik&display=swap');
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+header,
+section {
+    overflow-x: hidden;
+}
+
+:root {
+    --Acme: 'Acme', sans-serif;
+    --Lato: 'Lato', sans-serif;
+    --Merriweather: 'Merriweather', serif;
+    --Patua: 'Patua One', cursive;
+    --Rubik: 'Rubik', sans-serif;
+    --light-black: #2e2c2caf;
+    --light-gray: rgba(255, 255, 255, 0.6);
+    --bggradient: linear-gradient(to left top, #1be157, #47eb8f, #75f4bb, #a8fadd, #ddfdf5);
+    --btn-color: radial-gradient(circle, #29bb7b, #36c687, #42d292, #4edd9e, #59e9aa);
+}
+
+header a {
+    font-family: var(--Rubik);
+    font-size: 1.1em;
+    color: black;
+}
+
+header {
+    background: var(--bggradient);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+header .navbar {
+    background-color: var(--light-gray);
+    border-radius: 1em;
+}
+
+header .navbar .log-btn {
+    padding-top: 0.5em
+}
+
+header .nav-item:last-child {
+    padding-right: 4.5em;
+}
+
+header .nav-item {
+    padding-left: 1em;
+}
+
+header .nav-link {
+    padding: 0.9em;
+}
+
+header .nav-link:hover {
+    color: var(--light-black);
+}
+
+header .navbar-brand {
+    font-family: var(--Merriweather);
+    font-size: 1.5em;
+    color: var(--light-black);
+    padding-left: 2.5em;
+}
+
+header .row .col-md-7 {
+    padding: 18.2vmin 1vmin;
+    padding-right: 15.5vmin;
+    --animate-repeat: 1;
+
+}
+
+header .row .col-md-5 {
+    padding: 20.2vmin 3vmin;
+    padding-bottom: 30vmin;
+    --animate-repeat: 1;
+}
+
+header .row .col-md-5 img {
+    width: 150%;
+}
+
+header .row .col-md-7 h1 {
+    font-family: var(--Lato);
+    font-weight: bold;
+    font-size: 3.5em;
+    color: var(--light-black);
+    padding-bottom: 0.2em;
+}
+
+#welcome-text {
+    font-family: var(--Lato);
+    font-weight: bold;
+    font-size: 1.6em;
+    color: var(--light-black);
+    padding-left: 1em;
+}
+
+.primary-btn {
+    margin: 15px;
+    display: inline-block;
+    padding: 1.25rem 0.5rem;
+    border-radius: 10rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.primary-btn:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:  var(--btn-color);
+    border-radius: 10rem;
+    z-index: -2;
+}
+.primary-btn:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #269649;
+    transition: all 0.3s;
+    border-radius: 10rem;
+    z-index: -1;
+}
+.primary-btn:hover {
+    color: #fff;
+}
+.primary-btn:hover:before {
+    width: 100%;
+}
+.panel {
+    max-width: 600px;
+    padding: 20px 10px 50px 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    z-index:1;
+}
+
+.bottoni-principali {
+    margin: 20px;
+}
