@@ -48,7 +48,7 @@ public class VoloController {
                             @RequestParam("aereoportoA") String aereoportoA, @RequestParam("dataP") LocalDate dataP,
                             @RequestParam("oraP") String oraP, @RequestParam("oraA") String oraA, Model model) {
         voloService.salvaNuovoVolo(volo, aereoportoP, aereoportoA, dataP, oraP, oraA);
-        return voli(model);
+        return volo(volo.getId(), model);
     }
 
     @GetMapping("/admin/modificaVolo")
