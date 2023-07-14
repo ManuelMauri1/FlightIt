@@ -30,7 +30,9 @@ public class VoloController {
     /*NON LOGGATI*/
     @GetMapping("/voli")
     public String voli(Model model) {
+        System.out.println("INIZIO TUTTI VOLI");
         model.addAttribute("voli", voloService.getVoli());
+        System.out.println("FINE TUTTI VOLI: ");
         return "voli.html";
     }
 
@@ -48,6 +50,8 @@ public class VoloController {
                             @RequestParam("aereoportoA") String aereoportoA, @RequestParam("dataP") LocalDate dataP,
                             @RequestParam("oraP") String oraP, @RequestParam("oraA") String oraA, Model model) {
         voloService.salvaNuovoVolo(volo, aereoportoP, aereoportoA, dataP, oraP, oraA);
+        aereoportoService.aggiungiVoloInEntrata(volo, aereoportoA);
+        aereoportoService.aggiungiVoloInUscita(volo, aereoportoP);
         return volo(volo.getId(), model);
     }
 

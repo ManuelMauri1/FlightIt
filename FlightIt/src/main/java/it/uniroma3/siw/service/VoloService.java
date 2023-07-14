@@ -18,6 +18,8 @@ import java.util.List;
 public class VoloService {
     @Autowired
     private VoloRepository voloRepository;
+    @Autowired
+    private AereoportoService aereoportoService;
 
     @Transactional
     public List<Volo> getVoli() {
@@ -40,8 +42,9 @@ public class VoloService {
         if (voloEsistente(volo.getCodiceVolo(), dataP)) {
             volo.setCodiceVolo(Volo.generaCodiceVolo());
         }
-        volo.setAereoportoArrivo(aereoportoA);
-        volo.setAereoportoPartenza(aereoportoP);
+
+        volo.setAereoportoArrivo(aereoportoService.getAereoportoByNome(aereoportoA));
+        volo.setAereoportoPartenza(aereoportoService.getAereoportoByNome(aereoportoP));
         volo.setDataPartenza(dataP);
         volo.setOraPartenza(parseOra(volo, oraP));
         volo.setOraArrivo(parseOra(volo, oraA));

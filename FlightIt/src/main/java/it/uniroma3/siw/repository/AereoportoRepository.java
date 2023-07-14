@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AereoportoRepository extends CrudRepository<Aereoporto, Long> {
     public List<Aereoporto> findAll();
+
+    public Aereoporto findByNome(String nome);
 }

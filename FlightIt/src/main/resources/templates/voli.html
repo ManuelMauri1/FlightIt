@@ -5,11 +5,6 @@
     <title>Voli</title>
 </head>
 <body>
-<header>
-    <span th:if="${authUser}" th:text="${authUser.username} "></span>
-    <span th:if="${userDetails}" th:text="${userDetails.username} "></span>
-    <a href="/logout">Logout</a>
-</header>
 <!-- Nella pagina saranno mostrati tutti i voli presenti nel database non terminati. All'inizio della pagina verrà
 mostrato il filtro figo per la decisione delle destinazioni. in fondo la lista mostrerà il volo, con le destinazioni, l'orario di
  partenza e arrivo, e se attualmente il volo sta venendo modificato
@@ -22,7 +17,7 @@ mostrato il filtro figo per la decisione delle destinazioni. in fondo la lista m
     <li th:each="volo : ${voli}" >
         <div class="movie-card">
             <a th:href="@{'autenticato/volo' + '/' + ${volo.id}}"
-               th:text="${volo.aereoportoPartenza} + ' -> ' + ${volo.aereoportoArrivo}" class="volo">Da -> A</a>
+               th:text="${volo.aereoportoPartenza.nome} + ' -> ' + ${volo.aereoportoArrivo.nome}" class="volo">Da -> A</a>
         </div>
 
     </li>

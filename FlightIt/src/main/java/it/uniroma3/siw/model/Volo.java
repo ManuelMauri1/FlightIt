@@ -24,8 +24,12 @@ public class Volo {
     private LocalDate dataPartenza;
     private Time oraPartenza;
     private Time oraArrivo;
-    private String aereoportoPartenza;
-    private String aereoportoArrivo;
+
+    @ManyToOne
+    private Aereoporto aereoportoPartenza;
+
+    @ManyToOne
+    private Aereoporto aereoportoArrivo;
 
     public Volo(){
         this.codiceVolo = generaCodiceVolo();
