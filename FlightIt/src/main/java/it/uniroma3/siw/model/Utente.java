@@ -23,6 +23,7 @@ public class Utente {
     private LocalDate dataNascita;
 
     @OneToMany
+    @JoinColumn(name = "preferiti_id")
     private List<Volo> preferiti;
 
     public Utente(String nome, String cognome){
