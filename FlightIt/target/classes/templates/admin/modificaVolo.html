@@ -29,7 +29,7 @@
         <li th:each="volo : ${voli}">
             <div>
                 <div>
-                    <div th:text="${volo.aereoportoPartenza} + ' -> ' + ${volo.aereoportoArrivo}">
+                    <div th:text="${volo.aereoportoPartenza.nome} + ' -> ' + ${volo.aereoportoArrivo.nome}">
                         Da -> A
                     </div>
                         <input type="checkbox" name="elimina" th:value="${volo.id}">
