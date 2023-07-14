@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Voli</title>
-  <link rel="stylesheet" href="/css/stileBottonePreferiti.css?version=2"/>
-  <!-- Per l'icona -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <script type="text/javascript">
-    function like() {
-      var heartIcon = document.getElementById('heart-icon');
-      var button = document.querySelector('.like-button');
-      if (button.textContent === 'LIKE') {
-        button.textContent = 'LIKED';
-        heartIcon.classList.remove('bi-suit-heart');
-        heartIcon.classList.add('bi-suit-heart-fill');
-      } else {
-        button.textContent = 'LIKE';
-        heartIcon.classList.remove('bi-suit-heart-fill');
-        heartIcon.classList.add('bi-suit-heart');
-      }
-      button.disabled = false;
-    }
-  </script>
+    <meta charset="UTF-8">
+    <title>Voli</title>
+    <link rel="stylesheet" href="/css/stileBottonePreferiti.css?version=2"/>
+    <!-- Per l'icona -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script type="text/javascript">
+        function like() {
+            var heartIcon = document.getElementById('heart-icon');
+            var button = document.querySelector('.like-button');
+            if (button.textContent === 'LIKE') {
+                button.textContent = 'LIKED';
+                heartIcon.classList.remove('bi-suit-heart');
+                heartIcon.classList.add('bi-suit-heart-fill');
+            } else {
+                button.textContent = 'LIKE';
+                heartIcon.classList.remove('bi-suit-heart-fill');
+                heartIcon.classList.add('bi-suit-heart');
+            }
+            button.disabled = false;
+        }
+    </script>
 </head>
 <body>
 <!-- Nella pagina saranno mostrati tutti i voli presenti nel database non terminati. All'inizio della pagina verrà
@@ -32,18 +32,25 @@ mostrato il filtro figo per la decisione delle destinazioni. in fondo la lista m
 <h1>Voli</h1>
 <div th:if="${voli.isEmpty()}" class="container">Non ci sono voli nel sistema</div>
 
-<ul class="movie-list">
-  <li th:each="volo : ${voli}">
-    <div class="movie-card" th:object="${volo}">
-      <a th:href="@{'autenticato/volo' + '/' + *{id}}"
-         th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
-      <a class="like-button" th:href="@{'/autenticato/voli/addPreferiti/' + *{id}}" onclick="like()">
-        <i id="heart-icon" class="bi bi-suit-heart" ></i>
-        LIKE
-      </a>
-    </div>
-
-  </li>
+<ul>
+    <li th:each="volo : ${voli}">
+        <div th:object="${volo}">
+            <a th:href="@{'autenticato/volo' + '/' + *{id}}"
+               th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
+            <a class="like-button" th:href="@{'/autenticato/voli/addPreferiti/' + *{id}}" onclick="like()">
+                <i id="heart-icon" class="bi bi-suit-heart"></i>
+                LIKE
+            </a>
+        </div>
+    </li>
+    <li th:each="preferito : ${preferiti}">
+        <a th:href="@{'autenticato/volo' + '/' + *{id}}"
+           th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
+        <a class="like-button" th:href="@{'/autenticato/voli/addPreferiti/' + *{id}}" onclick="like()">
+            <i id="heart-icon" class="bi bi-suit-heart-fill"></i>
+            LIKED
+        </a>
+    </li>
 </ul>
 </body>
 </html>

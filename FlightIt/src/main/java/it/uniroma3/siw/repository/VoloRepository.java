@@ -9,5 +9,5 @@ import java.util.List;
 public interface VoloRepository extends CrudRepository<Volo, Long> {
     public List<Volo> findAll();
     public boolean existsByCodiceVoloAndDataPartenza(String codiceVolo, LocalDate dataPartenza);
-
+    public List<Volo> findAllByIdNotIn(List<Long> idVoliEsclusi);
 }
