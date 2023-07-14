@@ -1,10 +1,12 @@
 package it.uniroma3.siw.controller;
 
+import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.model.Volo;
 import it.uniroma3.siw.repository.VoloRepository;
 import it.uniroma3.siw.service.AereoportoService;
 import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.UtenteService;
 import it.uniroma3.siw.service.VoloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,13 +28,13 @@ public class VoloController {
     private VoloService voloService;
     @Autowired
     private AereoportoService aereoportoService;
+    @Autowired
+    private UtenteService utenteService;
 
     /*NON LOGGATI*/
     @GetMapping("/voli")
     public String voli(Model model) {
-        System.out.println("INIZIO TUTTI VOLI");
         model.addAttribute("voli", voloService.getVoli());
-        System.out.println("FINE TUTTI VOLI: ");
         return "voli.html";
     }
 
@@ -74,4 +76,10 @@ public class VoloController {
         return "/autenticato/volo";
     }
 
+    @GetMapping("/voli/addPreferiti/{idVolo}")
+    public String addPreferiti(@PathVariable("idVolo")Long idVolo, Model model){
+       //Volo volo = voloService.getVolo(idVolo);
+       //utenteService.addVoloPreferiti(volo);
+        return voli(model);
+    }
 }

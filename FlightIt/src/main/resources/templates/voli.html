@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Voli</title>
+    <link rel="stylesheet" href="/css/stileBottonePreferiti.css?version=2"/>
 </head>
 <body>
 <!-- Nella pagina saranno mostrati tutti i voli presenti nel database non terminati. All'inizio della pagina verrà
@@ -14,10 +15,13 @@ mostrato il filtro figo per la decisione delle destinazioni. in fondo la lista m
 <div th:if="${voli.isEmpty()}" class="container">Non ci sono voli nel sistema</div>
 
 <ul class="movie-list">
-    <li th:each="volo : ${voli}" >
-        <div class="movie-card">
-            <a th:href="@{'autenticato/volo' + '/' + ${volo.id}}"
-               th:text="${volo.aereoportoPartenza.nome} + ' -> ' + ${volo.aereoportoArrivo.nome}" class="volo">Da -> A</a>
+    <li th:each="volo : ${voli}">
+        <div class="movie-card" th:object="${volo}">
+            <a th:href="@{'autenticato/volo' + '/' + *{id}}"
+               th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
+            <a class="like-button" th:href="@{'/voli/addPreferiti/' + *{id}}">
+
+            </a>
         </div>
 
     </li>

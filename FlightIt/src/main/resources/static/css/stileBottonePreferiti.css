@@ -1,0 +1,21 @@
+.like-button {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border: solid 2px black;
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+}
+
+.like-button:hover {
+    background-color: white;
+}
+
+.like-button:focus {
+    outline: none;
+}

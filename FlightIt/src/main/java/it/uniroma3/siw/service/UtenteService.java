@@ -1,6 +1,7 @@
 package it.uniroma3.siw.service;
 
 import it.uniroma3.siw.model.Utente;
+import it.uniroma3.siw.model.Volo;
 import it.uniroma3.siw.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,5 +32,9 @@ public class UtenteService {
     @Transactional
     public void setUtente(Utente utente, String dataN){
         utente.setDataNascita(LocalDate.parse(dataN));
+    }
+
+    @Transactional
+    public void addVoloPreferiti(Volo volo) {
     }
 }
