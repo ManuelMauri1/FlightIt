@@ -38,6 +38,7 @@ public class UtenteController {
             credentials = credentialsService.getCredentialsByUsername(usernames[1]);
 
         model.addAttribute("credenziali", credentials);
+        model.addAttribute("utente", credentials.getUtente());
         return "autenticato/areaUtente";
     }
 }

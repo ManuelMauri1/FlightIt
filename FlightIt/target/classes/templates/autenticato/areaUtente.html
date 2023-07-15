@@ -11,13 +11,12 @@
 
   In seguito sarà presentata la lista dei voli che l'utente ha deciso di salvarsi come preferiti.
   -->
-<h1>AREA UTENTE</h1>
 <header>
     <span th:if="${authUser}" th:text="${authUser.username}"></span>
     <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
     <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
 </header>
-</body>
+<h1>AREA UTENTE</h1>
 
 <div>
     <h1>INFORMAZIONI PERSONALI</h1>
@@ -25,7 +24,16 @@
         <div>
             <label th:text="'Username utilizzato: ' + *{username}">Username</label>
         </div>
+        <div th:object="${utente}">
+            <div>
+                <label th:text="'Nome inserito: ' + *{nome} + ' ' + *{cognome}">Nome Cognome</label>
+            </div>
+            <div>
+                <label th:text="'Data di nascita: ' + *{dataNascita}">Data Nascita</label>
+            </div>
+        </div>
     </div>
 </div>
 
+</body>
 </html>

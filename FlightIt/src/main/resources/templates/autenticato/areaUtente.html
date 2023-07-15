@@ -24,6 +24,14 @@
         <div>
             <label th:text="'Username utilizzato: ' + *{username}">Username</label>
         </div>
+        <div th:object="${utente}">
+            <div>
+                <label th:text="'Nome inserito: ' + *{nome} + ' ' + *{cognome}">Nome Cognome</label>
+            </div>
+            <div>
+                <label th:text="'Data di nascita: ' + *{dataNascita}">Data Nascita</label>
+            </div>
+        </div>
     </div>
 </div>
 
