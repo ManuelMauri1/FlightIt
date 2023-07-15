@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.model.Volo;
 import it.uniroma3.siw.service.AereoportoService;
@@ -27,8 +28,12 @@ public class VoloController {
     @GetMapping("/voli")
     public String voli(Model model) {
         String[] usernames = getUsernames(model);
-        model.addAttribute("voli", voloService.getVoli());
-        model.addAttribute("preferiti", utenteService.getPreferiti(usernames));
+        List<Volo> preferiti = utenteService.getPreferiti(usernames);
+        if(usernames[0] == null && usernames[1] == null)
+            model.addAttribute("voli", voloService.getVoli());
+        else
+            model.addAttribute("voli", voloService.getVoliNonPreferiti(preferiti));
+        model.addAttribute("preferiti", preferiti);
         return "voli.html";
     }
 
@@ -77,7 +82,7 @@ public class VoloController {
     }
 
     public String[] getUsernames(Model model) {
-        UtenteOAuth2User authUser = (UtenteOAuth2User) model.getAttribute("authUser");
+        Credentials authUser = (Credentials) model.getAttribute("authUser");
         UserDetails user = (UserDetails) model.getAttribute("userDetails");
         return utenteService.getUsernames(authUser, user);
     }

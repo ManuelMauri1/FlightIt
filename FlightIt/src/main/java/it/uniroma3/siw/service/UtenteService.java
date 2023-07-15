@@ -1,5 +1,6 @@
 package it.uniroma3.siw.service;
 
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.model.Volo;
@@ -20,6 +21,8 @@ public class UtenteService {
     private UtenteRepository userRepository;
     @Autowired
     private CredentialsService credentialsService;
+    @Autowired
+    private VoloService voloService;
 
     @Transactional
     public void setNome(Utente utente, String nome) {
@@ -48,10 +51,10 @@ public class UtenteService {
     }
 
     @Transactional
-    public String[] getUsernames(UtenteOAuth2User authUser, UserDetails userDetails) {
+    public String[] getUsernames(Credentials authUser, UserDetails userDetails) {
         String[] usernames = new String[2];
         if (authUser != null)
-            usernames[0] = authUser.getLoginName();
+            usernames[0] = authUser.getUsername();
         if (userDetails != null)
             usernames[1] = userDetails.getUsername();
         return usernames;
@@ -60,15 +63,17 @@ public class UtenteService {
     public List<Volo> getPreferiti(String[] usernames) {
         List<Volo> preferiti = new ArrayList<>();
         Utente utente = null;
-        /*try {
-            utente = credentialsService.getUtenteByUsername(usernames[0]);
+        if (usernames[0] != null || usernames[1] != null) {
+            try {
+                utente = credentialsService.getUtenteByUsername(usernames[0]);
 
-        } catch (Exception e) {
-            utente = credentialsService.getUtenteByUsername(usernames[1]);
+            } catch (Exception e) {
+                utente = credentialsService.getUtenteByUsername(usernames[1]);
+            }
+            if (!utente.getPreferiti().isEmpty())
+                preferiti.addAll(utente.getPreferiti());
         }
-        if(!utente.getPreferiti().isEmpty())
-            preferiti = utente.getPreferiti();
-        */
+
         return preferiti;
     }
 }

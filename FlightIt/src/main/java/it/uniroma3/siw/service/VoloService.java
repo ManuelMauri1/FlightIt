@@ -86,4 +86,13 @@ public class VoloService {
         }
         return voli;
     }
+
+    public List<Volo> getVoliNonPreferiti(List<Volo> preferiti) {
+        List<Long> preferitiId = new ArrayList<>();
+        for (Volo preferito: preferiti) {
+            preferitiId.add(preferito.getId());
+        }
+
+        return voloRepository.findAllByIdNotIn(preferitiId);
+    }
 }
