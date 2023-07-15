@@ -42,13 +42,10 @@ public class UtenteService {
     }
 
     public void addVoloPreferiti(Volo volo, String[] usernames) {
-        System.out.println("ADD VOLO PREFERITI");
         Utente utente = null;
-
-        try{
+        try {
             utente = credentialsService.getUtenteByUsername(usernames[0]);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             utente = credentialsService.getUtenteByUsername(usernames[1]);
         }
 
