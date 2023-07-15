@@ -41,14 +41,24 @@ public class UtenteService {
 
     public void addVoloPreferiti(Volo volo, String[] usernames) {
         Utente utente = null;
-        try {
+        if(usernames[0] != null)
             utente = credentialsService.getUtenteByUsername(usernames[0]);
-        } catch (Exception e) {
+        else
             utente = credentialsService.getUtenteByUsername(usernames[1]);
-        }
 
         utente.getPreferiti().add(volo);
         volo.getPreferitiUtente().add(utente);
+    }
+
+    public void removeVoloPreferiti(Volo volo, String[] usernames) {
+        Utente utente = null;
+        if(usernames[0] != null)
+            utente = credentialsService.getUtenteByUsername(usernames[0]);
+        else
+            utente = credentialsService.getUtenteByUsername(usernames[1]);
+
+        utente.getPreferiti().remove(volo);
+        volo.getPreferitiUtente().remove(utente);
     }
 
     @Transactional
@@ -56,6 +66,7 @@ public class UtenteService {
         String[] usernames = new String[2];
         if (authUser != null)
             usernames[0] = authUser.getUsername();
+
         if (userDetails != null)
             usernames[1] = userDetails.getUsername();
         return usernames;
@@ -77,4 +88,5 @@ public class UtenteService {
 
         return preferiti;
     }
+
 }

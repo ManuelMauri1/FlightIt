@@ -57,7 +57,7 @@
                <div th:object="${preferito}">
                    <a th:href="@{'/autenticato/volo' + '/' + *{id}}"
                       th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
-                   <a class="like-button" th:href="@{'/autenticato/voli/addPreferiti/' + *{id}}" onclick="like()">
+                   <a class="like-button" th:href="@{'/autenticato/voli/removePreferiti/' + *{id}}" onclick="like()">
                        <i id="heart-icon" class="bi bi-suit-heart-fill"></i>
                        LIKED
                    </a>

@@ -81,8 +81,13 @@ public class VoloController {
         return voli(model);
     }
 
-    /* METODI GENERICI */
+    @GetMapping("/autenticato/voli/removePreferiti/{idVolo}")
+    public String removePreferiti(@PathVariable("idVolo") Long idVolo, Model model){
+        utenteService.removeVoloPreferiti(voloService.getVolo(idVolo), getUsernames(model));
+        return voli(model);
+    }
 
+    /* METODI GENERICI */
     public String[] getUsernames(Model model) {
         Credentials authUser = (Credentials) model.getAttribute("authUser");
         UserDetails localUser = (UserDetails) model.getAttribute("userDetails");
