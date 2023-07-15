@@ -82,16 +82,11 @@ public class VoloController {
     public String addPreferiti(@PathVariable("idVolo") Long idVolo, Model model) {
         UtenteOAuth2User authUser = (UtenteOAuth2User) model.getAttribute("authUser");
         UserDetails user = (UserDetails) model.getAttribute("userDetails");
-        String authUsername = null;
-        String username = null;
-        if(authUser != null)
-            authUsername = authUser.getLoginName();
-        if(user != null)
-            username = user.getUsername();
+        String[] usernames = utenteService.getUsernames(authUser, user);
 
-        System.out.println("VOLI AUTENTICATO ADD PREFERITI: " + idVolo + '\n' + username + '\n' + authUsername);
+        System.out.println("VOLI AUTENTICATO ADD PREFERITI: " + idVolo + ' ' + usernames[0] + ' ' + usernames[1]);
         Volo volo = voloService.getVolo(idVolo);
-        utenteService.addVoloPreferiti(volo);
+        utenteService.addVoloPreferiti(volo, usernames);
         model.addAttribute("voli", voloService.getVoli());
         return voli(model);
     }
