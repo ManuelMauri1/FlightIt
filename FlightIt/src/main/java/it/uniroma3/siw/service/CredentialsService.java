@@ -34,12 +34,6 @@ public class CredentialsService {
     }
 
     @Transactional
-    public Utente getUtenteByUsername(String username){
-        Credentials credentials = getCredentialsByUsername(username);
-        return credentials.getUtente();
-    }
-
-    @Transactional
     public Credentials saveCredentials(Credentials credentials) {
         credentials.setRuolo(Credentials.RUOLO_AUTORIZZATO);
         try {
