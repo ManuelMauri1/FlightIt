@@ -71,14 +71,15 @@ public class VoloController {
 
     @GetMapping("/autenticato/voli/addPreferiti/{idVolo}")
     public String addPreferiti(@PathVariable("idVolo") Long idVolo, Model model) {
+        String[] usernames = getUsernames(model);
+
+        utenteService.addVoloPreferiti(voloService.getVolo(idVolo), usernames);
+        return voli(model);
+    }
+
+    public String[] getUsernames(Model model) {
         UtenteOAuth2User authUser = (UtenteOAuth2User) model.getAttribute("authUser");
         UserDetails user = (UserDetails) model.getAttribute("userDetails");
-        String[] usernames = utenteService.getUsernames(authUser, user);
-
-        System.out.println("VOLI AUTENTICATO ADD PREFERITI: " + idVolo + ' ' + usernames[0] + ' ' + usernames[1]);
-        Volo volo = voloService.getVolo(idVolo);
-        utenteService.addVoloPreferiti(volo, usernames);
-        model.addAttribute("voli", voloService.getVoli());
-        return voli(model);
+        return utenteService.getUsernames(authUser, user);
     }
 }
