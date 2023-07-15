@@ -7,11 +7,11 @@ import lombok.*;
 import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 public class Utente {
     @Id
@@ -26,7 +26,12 @@ public class Utente {
     @JoinColumn(name = "preferiti_id")
     private List<Volo> preferiti;
 
+    public Utente(){
+        preferiti = new ArrayList<>();
+    }
+
     public Utente(String nome, String cognome){
+        this();
         setNome(nome);
         setCognome(cognome);
     }
