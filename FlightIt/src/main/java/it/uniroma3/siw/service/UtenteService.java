@@ -38,7 +38,7 @@ public class UtenteService {
 
     @Transactional
     public void addVoloPreferiti(Volo volo) {
-        System.out.println("ADD VOLO PREFERITI");
+        System.out.println("ADD VOLO PREFERITI: ");
     }
 
     public List<Volo> getPreferiti() {
