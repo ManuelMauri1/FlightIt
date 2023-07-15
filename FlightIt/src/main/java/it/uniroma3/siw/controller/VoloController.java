@@ -83,7 +83,7 @@ public class VoloController {
 
     public String[] getUsernames(Model model) {
         Credentials authUser = (Credentials) model.getAttribute("authUser");
-        UserDetails user = (UserDetails) model.getAttribute("userDetails");
-        return utenteService.getUsernames(authUser, user);
+        UserDetails localUser = (UserDetails) model.getAttribute("userDetails");
+        return utenteService.getUsernames(authUser, localUser);
     }
 }
