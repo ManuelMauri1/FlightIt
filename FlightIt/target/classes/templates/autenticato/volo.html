@@ -16,9 +16,9 @@
     Se sei admin, verrà mostrato anche il bottone "Modifica" per modificare il volo
 -->
 <header>
-    <span th:if="${authUser}" th:text="${authUser.username} "></span>
-    <span th:if="${userDetails}" th:text="${userDetails.username} "></span>
-    <a href="/logout">Logout</a>
+    <span th:if="${authUser}" th:text="${authUser.username}"></span>
+    <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
+    <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
 </header>
 <div th:if="${volo}" th:object="${volo}">
     <div>

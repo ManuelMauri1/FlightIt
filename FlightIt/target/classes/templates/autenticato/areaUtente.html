@@ -6,11 +6,26 @@
 </head>
 <body>
 
-    <!-- All'inizio della pagina utente saranno presenti i dati dell'utente, in particolare nome, cognome, e
-     se abbiamo tempo immagine profilo.
+<!-- All'inizio della pagina utente saranno presenti i dati dell'utente, in particolare nome, cognome, e
+ se abbiamo tempo immagine profilo.
 
-      In seguito sarà presentata la lista dei voli che l'utente ha deciso di salvarsi come preferiti.
-      -->
+  In seguito sarà presentata la lista dei voli che l'utente ha deciso di salvarsi come preferiti.
+  -->
 <h1>AREA UTENTE</h1>
+<header>
+    <span th:if="${authUser}" th:text="${authUser.username}"></span>
+    <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
+    <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
+</header>
 </body>
+
+<div>
+    <h1>INFORMAZIONI PERSONALI</h1>
+    <div th:object="${credenziali}">
+        <div>
+            <label th:text="'Username utilizzato: ' + *{username}">Username</label>
+        </div>
+    </div>
+</div>
+
 </html>

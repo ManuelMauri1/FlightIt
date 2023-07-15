@@ -81,12 +81,6 @@ public class VoloController {
         return voli(model);
     }
 
-    @GetMapping("/autenticato/areaUtente")
-    public String areaUtente(Model model){
-        return "autenticato/areaUtente";
-    }
-
-
     /* METODI GENERICI */
 
     public String[] getUsernames(Model model) {

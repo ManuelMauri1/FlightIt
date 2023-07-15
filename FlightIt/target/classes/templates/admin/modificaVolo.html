@@ -9,14 +9,14 @@
 
 <body>
 <header>
-    <span th:if="${credentials}" th:text="${credentials.getUsername()} + ' ' + ${credentials.getRuolo()}"></span>
-    <a href="/logout">Logout</a>
+    <span th:if="${authUser}" th:text="${authUser.username}"></span>
+    <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
+    <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
     <a href="/admin/indexAdmin" class="freccia-indietro">
         <i class="fas fa-arrow-left"></i>
         Torna indietro
     </a>
 </header>
-
 <h1>VOLI</h1>
 <!-- La pagina conterrà delle form per modificare tutte le informazioni riguardanti un singolo volo.
  le info sono le stesse conenute all'interno del dettagio volo, con l'aggiunta della modifica dell'orario.
