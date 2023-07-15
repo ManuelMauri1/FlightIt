@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link href="/css/styleLogin.css?" rel="stylesheet"/>
+    <link href="/css/styleCard.css" rel="stylesheet"/>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -58,32 +59,33 @@
     </nav>
 </header>
 
-<div th:if="${voli == null}">Non ci sono film nel sistema</div>
-<div class="card-group film-cards">
+<div class="card-group">
     <div th:each="volo : ${voli}">
-        <div class="card mb-3 film-single-card" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-3">
-                    <h5 class="card-title" th:text="${volo.aereoportoPartenza}">Card title</h5>
-                    <br>
-                    <img th:src="@{${...}}" class="img-fluid rounded film-img" alt="imgFilm"> <!-- TODO: aggiungere presentazione partenza -->
+        <div class="card l-bg-orange voli-card">
+            <div class="card-statistic-3 p-4">
+                <div class="card-icon card-icon-large"><i class="fas fa-duotone fa-plane"></i></div>
+                <div class="mb-4">
+                    <h5 class="card-title mb-0" th:text="${volo.aereoportoPartenza} + ' - ' + ${volo.aereoportoArrivo}">New Flight</h5>
                 </div>
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <p class="card-text">This is a wider card with supporting text below as a natural
-                            lead-in to additional content. This content is a little bit longer.</p>
+                <div class="row align-items-center mb-2 d-flex">
+                    <div class="col-8">
+                        <h2 class="d-flex align-items-center mb-0" th:text="${volo.dataPartenza} + ' ' + ${volo.oraPartenza}"></h2>
+                        <br>
+                        <h2 th:text="${volo.oraPartenza} + ' / ' + ${volo.oraArrivo}"></h2>
+                    </div>
+                    <div class="col-4 text-right">
+                        <span>12.5% <i class="fa-light fa-plane-circle-check"></i></span>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <h5 class="card-subtitle mb-2 text-muted" th:text="${volo.aereoportoArrivo}">Card subtitle</h5>
-                    <br>
-                    <img th:src="@{${...}}" class="img-fluid rounded film-img" alt="imgFilm"> <!-- TODO: aggiungere presentazione arrivo -->
+                <!-- TODO: Rendere la progress bar dinamica con il tempo mancante al volo -->
+                <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                    <div class="progress-bar l-bg-orange-dark" role="progressbar" data-width="25%" aria-valuenow="25"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 </body>
 </html>
