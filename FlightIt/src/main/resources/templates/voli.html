@@ -1,27 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Voli</title>
+    <link href="/css/styleLogin.css?" rel="stylesheet"/>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2c740d50fa.js" crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Patua+One&family=Rubik&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>FlightIt - Voli</title>
 </head>
-<body>
+<body style="overflow: auto">
 
-<!-- Nella pagina saranno mostrati tutti i voli presenti nel database non terminati. All'inizio della pagina verrà
-mostrato il filtro figo per la decisione delle destinazioni. in fondo la lista mostrerà il volo, con le destinazioni, l'orario di
- partenza e arrivo, e se attualmente il volo sta venendo modificato
- th:href="@{'/volo' + '/' + ${volo.id}}"
- -->
-<h1>Voli</h1>
-<div th:if="${voli.isEmpty()}" class="container">Non ci sono voli nel sistema</div>
+<!-- Header -->
 
-<ul class="movie-list">
-    <li th:each="volo : ${voli}" >
-        <div class="movie-card">
-            <a th:href="@{'autenticato/volo' + '/' + ${volo.id}}"
-               th:text="${volo.aereoportoPartenza} + ' -> ' + ${volo.aereoportoArrivo}" class="volo">Da -> A</a>
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <img class="navbar-brand img-fluid" src="/images/logo-siw.png" href="/" width="15%"/>
+        <div th:if="${userDetails}">
+            <span class="username-logged" id="welcome-text"
+                  th:text="'Hi, ' + ${userDetails.username}"></span>
         </div>
+        <div th:if="${authUser}">
+            <span class="username-logged" id="welcome-text-oauth"
+                  th:text="'Hi, ' + ${authUser.username}"></span>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="mr-auto"></div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/movies">Film</a>
+                <a class="nav-item nav-link" href="/artists">Artisti</a>
+                <div class="nav-item  log-btn">
+                    <a class="btn btn-danger my-2 my-sm-0" type="submit" href="/logout">Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
 
-    </li>
-</ul>
+<div th:if="${voli == null}">Non ci sono film nel sistema</div>
+<div class="card-group film-cards">
+    <div th:each="volo : ${voli}">
+        <div class="card mb-3 film-single-card" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-3">
+                    <h5 class="card-title" th:text="${volo.aereoportoPartenza}">Card title</h5>
+                    <br>
+                    <img th:src="@{${...}}" class="img-fluid rounded film-img" alt="imgFilm"> <!-- TODO: aggiungere presentazione partenza -->
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural
+                            lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="card-subtitle mb-2 text-muted" th:text="${volo.aereoportoArrivo}">Card subtitle</h5>
+                    <br>
+                    <img th:src="@{${...}}" class="img-fluid rounded film-img" alt="imgFilm"> <!-- TODO: aggiungere presentazione arrivo -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
