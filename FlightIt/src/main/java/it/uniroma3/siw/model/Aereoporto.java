@@ -17,4 +17,10 @@ public class Aereoporto {
     private Long id;
 
     private String nome;
+
+    @OneToMany(mappedBy = "aereoportoArrivo")
+    private List<Volo> voliInEntrata;
+
+    @OneToMany(mappedBy = "aereoportoPartenza")
+    private List<Volo> voliInUscita;
 }
