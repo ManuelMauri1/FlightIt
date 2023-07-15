@@ -22,11 +22,6 @@ public class UtenteService {
     private CredentialsService credentialsService;
 
     @Transactional
-    public UserDetails getUserDetails() {
-        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-
-    @Transactional
     public void setNome(Utente utente, String nome) {
         utente.setNome(nome);
     }
@@ -62,7 +57,18 @@ public class UtenteService {
         return usernames;
     }
 
-    public List<Volo> getPreferiti() {
-        return new ArrayList<Volo>();
+    public List<Volo> getPreferiti(String[] usernames) {
+        List<Volo> preferiti = new ArrayList<>();
+        Utente utente = null;
+        /*try {
+            utente = credentialsService.getUtenteByUsername(usernames[0]);
+
+        } catch (Exception e) {
+            utente = credentialsService.getUtenteByUsername(usernames[1]);
+        }
+        if(!utente.getPreferiti().isEmpty())
+            preferiti = utente.getPreferiti();
+        */
+        return preferiti;
     }
 }

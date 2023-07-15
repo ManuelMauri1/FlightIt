@@ -26,8 +26,9 @@ public class VoloController {
     /*NON LOGGATI*/
     @GetMapping("/voli")
     public String voli(Model model) {
+        String[] usernames = getUsernames(model);
         model.addAttribute("voli", voloService.getVoli());
-        model.addAttribute("preferiti", utenteService.getPreferiti());
+        model.addAttribute("preferiti", utenteService.getPreferiti(usernames));
         return "voli.html";
     }
 
@@ -71,9 +72,7 @@ public class VoloController {
 
     @GetMapping("/autenticato/voli/addPreferiti/{idVolo}")
     public String addPreferiti(@PathVariable("idVolo") Long idVolo, Model model) {
-        String[] usernames = getUsernames(model);
-
-        utenteService.addVoloPreferiti(voloService.getVolo(idVolo), usernames);
+        utenteService.addVoloPreferiti(voloService.getVolo(idVolo), getUsernames(model));
         return voli(model);
     }
 
