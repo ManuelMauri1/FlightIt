@@ -59,29 +59,27 @@
     </nav>
 </header>
 
-<div class="card-group">
-    <div th:each="volo : ${voli}">
-        <div class="card l-bg-orange voli-card">
-            <div class="card-statistic-3 p-4">
-                <div class="card-icon card-icon-large"><i class="fas fa-duotone fa-plane"></i></div>
-                <div class="mb-4">
-                    <h5 class="card-title mb-0" th:text="${volo.aereoportoPartenza} + ' - ' + ${volo.aereoportoArrivo}">New Flight</h5>
+<div th:each="volo : ${voli}">
+    <div class="card l-bg-orange-dark voli-card">
+        <div class="card-statistic-3 p-4">
+            <div class="card-icon card-icon-large"><i class="fas fa-light fa-plane-departure"></i>"></div>
+            <div class="mb-4">
+                <h5 class="card-title mb-0"
+                    th:text="${volo.aereoportoPartenza.nome} + ' - ' + ${volo.aereoportoArrivo.nome}">Revenue Today</h5>
+            </div>
+            <div class="row align-items-center mb-2 d-flex">
+                <div class="col-8">
+                    <h2 class="d-flex align-items-center mb-0">
+                        $11.61k
+                    </h2>
                 </div>
-                <div class="row align-items-center mb-2 d-flex">
-                    <div class="col-8">
-                        <h2 class="d-flex align-items-center mb-0" th:text="${volo.dataPartenza} + ' ' + ${volo.oraPartenza}"></h2>
-                        <br>
-                        <h2 th:text="${volo.oraPartenza} + ' / ' + ${volo.oraArrivo}"></h2>
-                    </div>
-                    <div class="col-4 text-right">
-                        <span>12.5% <i class="fa-light fa-plane-circle-check"></i></span>
-                    </div>
+                <div class="col-4 text-right">
+                    <span>2.5% <i class="fa fa-arrow-up"></i></span>
                 </div>
-                <!-- TODO: Rendere la progress bar dinamica con il tempo mancante al volo -->
-                <div class="progress mt-1 " data-height="8" style="height: 8px;">
-                    <div class="progress-bar l-bg-orange-dark" role="progressbar" data-width="25%" aria-valuenow="25"
-                         aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
-                </div>
+            </div>
+            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25"
+                     aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
             </div>
         </div>
     </div>
