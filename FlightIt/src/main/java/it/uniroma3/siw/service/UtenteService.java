@@ -48,6 +48,7 @@ public class UtenteService {
         }
 
         utente.getPreferiti().add(volo);
+        volo.getPreferitiUtente().add(utente);
     }
 
     @Transactional
