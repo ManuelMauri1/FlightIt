@@ -29,20 +29,32 @@ mostrato il filtro figo per la decisione delle destinazioni. in fondo la lista m
  partenza e arrivo, e se attualmente il volo sta venendo modificato
  th:href="@{'/volo' + '/' + ${volo.id}}"
  -->
+<header>
+    <span th:if="${authUser}" th:text="${authUser.username}"><a href="/logout">Logout</a></span>
+    <span th:if="${userDetails}" th:text="${userDetails.username}"><a href="/logout">Logout</a></span>
+</header>
+
 <h1>Voli</h1>
 <div th:if="${voli.isEmpty()}" class="container">Non ci sono voli nel sistema</div>
 
-<ul class="movie-list">
+<ul>
     <li th:each="volo : ${voli}">
-        <div class="movie-card" th:object="${volo}">
-            <a th:href="@{'autenticato/volo' + '/' + *{id}}"
+        <div th:object="${volo}">
+            <a th:href="@{'/autenticato/volo' + '/' + *{id}}"
                th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
-            <a class="like-button" th:href="@{'/voli/addPreferiti/' + *{id}}" onclick="like()">
+            <a class="like-button" th:href="@{'/autenticato/voli/addPreferiti/' + *{id}}" onclick="like()">
                 <i id="heart-icon" class="bi bi-suit-heart" ></i>
                 LIKE
             </a>
         </div>
-
+    </li>
+    <li th:each="preferito : ${preferiti}">
+        <a th:href="@{'/autenticato/volo' + '/' + *{id}}"
+           th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
+        <a class="like-button" th:href="@{'/autenticato/voli/addPreferiti/' + *{id}}" onclick="like()">
+            <i id="heart-icon" class="bi bi-suit-heart-fill"></i>
+            LIKED
+        </a>
     </li>
 </ul>
 </body>

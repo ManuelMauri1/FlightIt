@@ -10,6 +10,7 @@ import it.uniroma3.siw.service.UtenteService;
 import it.uniroma3.siw.service.VoloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class VoloController {
     @GetMapping("/voli")
     public String voli(Model model) {
         model.addAttribute("voli", voloService.getVoli());
+        model.addAttribute("preferiti", utenteService.getPreferiti());
         return "voli.html";
     }
 
@@ -76,17 +78,21 @@ public class VoloController {
         return "/autenticato/volo";
     }
 
-    @GetMapping("/autenticato/voli")
-    public String voliAutenticato(Model model){
-        System.out.println("VOLI AUTENTICATO");
-        model.addAttribute("voli", voloService.getVoli());
-        return "autenticato/voliAutenticato";
-    }
-
     @GetMapping("/autenticato/voli/addPreferiti/{idVolo}")
     public String addPreferiti(@PathVariable("idVolo") Long idVolo, Model model) {
+        UtenteOAuth2User authUser = (UtenteOAuth2User) model.getAttribute("authUser");
+        UserDetails user = (UserDetails) model.getAttribute("userDetails");
+        String authUsername = null;
+        String username = null;
+        if(authUser != null)
+            authUsername = authUser.getLoginName();
+        if(user != null)
+            username = user.getUsername();
+
+        System.out.println("VOLI AUTENTICATO ADD PREFERITI: " + idVolo + '\n' + username + '\n' + authUsername);
         Volo volo = voloService.getVolo(idVolo);
         utenteService.addVoloPreferiti(volo);
-        return voliAutenticato(model);
+        model.addAttribute("voli", voloService.getVoli());
+        return voli(model);
     }
 }

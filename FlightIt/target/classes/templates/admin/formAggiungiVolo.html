@@ -12,7 +12,7 @@ Sotto le form sarà presente un bottone per confermare l'inserimento o per annul
     <div>
         <label> Aereoporto di partenza </label>
         <span>
-            <input type="text" name="aereoportoP" list="imbarchi"/>
+            <input type="text" required="required" name="aereoportoP" list="imbarchi"/>
             <datalist id="imbarchi">
                 <ul>
                     <li th:each="aereoporto : ${aereoporti}">
@@ -25,7 +25,7 @@ Sotto le form sarà presente un bottone per confermare l'inserimento o per annul
     <div>
         <label> Aereoporto di arrivo </label>
         <span>
-            <input type="text" name="aereoportoA" list="sbarchi"/>
+            <input type="text" required="required" name="aereoportoA" list="sbarchi"/>
              <datalist id="sbarchi">
                 <ul>
                     <li th:each="aereoporto : ${aereoporti}">
@@ -38,19 +38,19 @@ Sotto le form sarà presente un bottone per confermare l'inserimento o per annul
     <div>
         <label> Data partenza </label>
         <span>
-            <input type="date" name="dataP"/>
+            <input type="date" name="dataP" required="required"/>
         </span>
     </div>
     <div>
         <label> Orario imbarco </label>
         <span>
-            <input type="time" name="oraP"/>
+            <input type="time" name="oraP" required="required"/>
         </span>
     </div>
     <div>
         <label> Orario sbarco </label>
         <span>
-            <input type="time" name="oraA"/>
+            <input type="time" name="oraA" required="required"/>
         </span>
     </div>
 

@@ -25,11 +25,11 @@
         <h1 th:text=" 'Codice volo: ' + *{codiceVolo}"></h1>
         <div>
             Aereoporto di imbarco:
-            <span th:text="*{aereoportoPartenza}"></span>
+            <span th:text="*{aereoportoPartenza.nome}"></span>
         </div>
         <div>
             Aereoporto di sbarco:
-            <span th:text="*{aereoportoArrivo}"></span>
+            <span th:text="*{aereoportoArrivo.nome}"></span>
         </div>
         <div>
             Data: <span th:text="*{dataPartenza}"></span>
