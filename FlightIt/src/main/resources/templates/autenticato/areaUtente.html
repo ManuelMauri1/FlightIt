@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Pagina Utente</title>
+    <link rel="stylesheet" href="/css/stileBottonePreferiti.css?version=2"/>
+    <!-- Per l'icona -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script type="text/javascript">
+        function like() {
+            var heartIcon = document.getElementById('heart-icon');
+            var button = document.querySelector('.like-button');
+            if (button.textContent === 'LIKE') {
+                button.textContent = 'LIKED';
+                heartIcon.classList.remove('bi-suit-heart');
+                heartIcon.classList.add('bi-suit-heart-fill');
+            } else {
+                button.textContent = 'LIKE';
+                heartIcon.classList.remove('bi-suit-heart-fill');
+                heartIcon.classList.add('bi-suit-heart');
+            }
+            button.disabled = false;
+        }
+    </script>
 </head>
 <body>
 
@@ -16,7 +35,6 @@
     <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
     <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
 </header>
-<h1>AREA UTENTE</h1>
 
 <div>
     <h1>INFORMAZIONI PERSONALI</h1>
@@ -24,14 +42,28 @@
         <div>
             <label th:text="'Username utilizzato: ' + *{username}">Username</label>
         </div>
-        <div th:object="${utente}">
-            <div>
-                <label th:text="'Nome inserito: ' + *{nome} + ' ' + *{cognome}">Nome Cognome</label>
-            </div>
-            <div>
-                <label th:text="'Data di nascita: ' + *{dataNascita}">Data Nascita</label>
-            </div>
+    </div>
+    <div th:object="${utente}">
+        <div>
+            <label th:text="'Nome inserito: ' + *{nome} + ' ' + *{cognome}">Nome Cognome</label>
         </div>
+        <div>
+            <label th:text="'Data di nascita: ' + *{dataNascita}">Data Nascita</label>
+        </div>
+    </div>
+    <div>
+        <ul>
+           <li th:each="preferito : ${preferiti}">
+               <div th:object="${preferito}">
+                   <a th:href="@{'/autenticato/volo' + '/' + *{id}}"
+                      th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
+                   <a class="like-button" th:href="@{'/autenticato/voli/addPreferiti/' + *{id}}" onclick="like()">
+                       <i id="heart-icon" class="bi bi-suit-heart-fill"></i>
+                       LIKED
+                   </a>
+               </div>
+           </li>
+        </ul>
     </div>
 </div>
 

@@ -39,6 +39,7 @@ public class UtenteController {
 
         model.addAttribute("credenziali", credentials);
         model.addAttribute("utente", credentials.getUtente());
+        model.addAttribute("preferiti", credentials.getUtente().getPreferiti());
         return "autenticato/areaUtente";
     }
 }
