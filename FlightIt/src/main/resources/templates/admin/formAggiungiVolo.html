@@ -9,6 +9,9 @@
 <!-- Pagina con form di inserimento dei dati del volo, in cui saranno per forza inseriti tutti.
 Sotto le form sarà presente un bottone per confermare l'inserimento o per annullarlo-->
 <form th:action="@{/admin/nuovoVolo}" method="post" th:object="${volo}">
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+    </div>
     <div>
         <label> Aereoporto di partenza </label>
         <span>
@@ -21,6 +24,7 @@ Sotto le form sarà presente un bottone per confermare l'inserimento o per annul
                 </ul>
             </datalist>
         </span>
+        <span th:if="${#fields.hasErrors('aereoportoP')}" th:errors="*{aereoportoP}"></span>
     </div>
     <div>
         <label> Aereoporto di arrivo </label>
@@ -34,24 +38,28 @@ Sotto le form sarà presente un bottone per confermare l'inserimento o per annul
                 </ul>
             </datalist>
         </span>
+        <span th:if="${#fields.hasErrors('aereoportoA')}" th:errors="*{aereoportoA}"></span>
     </div>
     <div>
         <label> Data partenza </label>
         <span>
             <input type="date" name="dataP" required="required"/>
         </span>
+        <span th:if="${#fields.hasErrors('dataP')}" th:errors="*{dataP}"></span>
     </div>
     <div>
         <label> Orario imbarco </label>
         <span>
             <input type="time" name="oraP" required="required"/>
         </span>
+        <span th:if="${#fields.hasErrors('oraP')}" th:errors="*{oraP}"></span>
     </div>
     <div>
         <label> Orario sbarco </label>
         <span>
             <input type="time" name="oraA" required="required"/>
         </span>
+        <span th:if="${#fields.hasErrors('oraA')}" th:errors="*{oraA}"></span>
     </div>
 
     <button type="submit">Registra volo</button>

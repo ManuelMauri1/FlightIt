@@ -51,7 +51,7 @@
                 </span>
                 <div>
                     <label class="line-username"> Username</label>
-                    <input type="text" maxlength="30" class="username" name="username" required
+                    <input type="text" maxlength="30" class="username" name="username" required="required"
                            th:field="*{username}"/>
                     <span class="username" th:if="${#fields.hasErrors('username')}"
                           th:errors="${credentials.username}"
@@ -59,7 +59,7 @@
                 </div>
                 <div>
                     <label class="line-pwd" for="password"> Password</label>
-                    <input type="password" maxlength="30" class="password" id="password" name="pwd" required
+                    <input type="password" maxlength="30" class="password" id="password" name="pwd" required="required"
                            th:field="*{password}"/>
                     <span>
                     <i id="eye-icon" class="bi bi-eye-slash-fill" onclick="mostraPassword()"></i>
@@ -75,13 +75,13 @@
                 </div>
                 <div>
                     <label class="line-nome"> Nome</label>
-                    <input type="text" maxlength="30" class="nome" required th:field="*{nome}"/>
+                    <input type="text" maxlength="30" class="nome" required="required" th:field="*{nome}"/>
                     <span class="nome" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
                           th:style="'color:red'"></span>
                 </div>
                 <div>
                     <label class="line-cognome"> Cognome</label>
-                    <input type="text" maxlength="30" class="cognome" required th:field="*{cognome}"/>
+                    <input type="text" maxlength="30" class="cognome" required="required" th:field="*{cognome}"/>
                     <span class="cognome" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"
                           th:style="'color:red'"></span>
                 </div>

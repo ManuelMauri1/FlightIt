@@ -24,5 +24,7 @@ public class VoloValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "aereoportoP", "NotBlank");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "aereoportoA", "NotBlank");
         Volo volo = (Volo) target;
+        if(voloRepository.existsVoloByDataPartenzaAndAereoportoPartenzaAndAereoportoArrivoAndOraPartenza(volo.getDataPartenza(), volo.getAereoportoPartenza(),volo.getAereoportoArrivo(),volo.getOraPartenza()))
+            errors.reject("volo.duplicati");
     }
 }
