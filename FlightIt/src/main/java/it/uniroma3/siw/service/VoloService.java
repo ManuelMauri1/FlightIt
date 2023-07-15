@@ -92,7 +92,9 @@ public class VoloService {
         for (Volo preferito: preferiti) {
             preferitiId.add(preferito.getId());
         }
-
-        return voloRepository.findAllByIdNotIn(preferitiId);
+        if(preferitiId.isEmpty())
+            return getVoli();
+        else
+            return voloRepository.findAllByIdNotIn(preferitiId);
     }
 }

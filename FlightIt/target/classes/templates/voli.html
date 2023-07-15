@@ -30,8 +30,9 @@ mostrato il filtro figo per la decisione delle destinazioni. in fondo la lista m
  th:href="@{'/volo' + '/' + ${volo.id}}"
  -->
 <header>
-    <span th:if="${authUser}" th:text="${authUser.username}"><a href="/logout">Logout</a></span>
-    <span th:if="${userDetails}" th:text="${userDetails.username}"><a href="/logout">Logout</a></span>
+    <span th:if="${authUser}" th:text="${authUser.username}"></span>
+    <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
+    <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
 </header>
 
 <h1>Voli</h1>
