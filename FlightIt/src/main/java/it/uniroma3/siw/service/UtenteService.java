@@ -41,7 +41,7 @@ public class UtenteService {
 
     public void addVoloPreferiti(Volo volo, String[] usernames) {
         Utente utente = null;
-        if(usernames[0] != null)
+        if (usernames[0] != null)
             utente = credentialsService.getUtenteByUsername(usernames[0]);
         else
             utente = credentialsService.getUtenteByUsername(usernames[1]);
@@ -52,7 +52,7 @@ public class UtenteService {
 
     public void removeVoloPreferiti(Volo volo, String[] usernames) {
         Utente utente = null;
-        if(usernames[0] != null)
+        if (usernames[0] != null)
             utente = credentialsService.getUtenteByUsername(usernames[0]);
         else
             utente = credentialsService.getUtenteByUsername(usernames[1]);
@@ -75,16 +75,13 @@ public class UtenteService {
     public List<Volo> getPreferiti(String[] usernames) {
         List<Volo> preferiti = new ArrayList<>();
         Utente utente = null;
-        if (usernames[0] != null || usernames[1] != null) {
-            try {
-                utente = credentialsService.getUtenteByUsername(usernames[0]);
+        if (usernames[0] != null)
+            utente = credentialsService.getUtenteByUsername(usernames[0]);
+        else
+            utente = credentialsService.getUtenteByUsername(usernames[1]);
 
-            } catch (Exception e) {
-                utente = credentialsService.getUtenteByUsername(usernames[1]);
-            }
-            if (!utente.getPreferiti().isEmpty())
-                preferiti.addAll(utente.getPreferiti());
-        }
+        if (!utente.getPreferiti().isEmpty())
+            preferiti.addAll(utente.getPreferiti());
 
         return preferiti;
     }
