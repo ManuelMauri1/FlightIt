@@ -27,42 +27,40 @@ public class UtenteService {
     }
 
     @Transactional
-    public void setNome(Utente utente, String nome){
+    public void setNome(Utente utente, String nome) {
         utente.setNome(nome);
     }
 
     @Transactional
-    public Utente saveUser(Utente user){
+    public Utente saveUser(Utente user) {
         return this.userRepository.save(user);
-    }
-    @Transactional
-    public void setUtente(Utente utente, String dataN){
-        utente.setDataNascita(LocalDate.parse(dataN));
     }
 
     @Transactional
+    public void setUtente(Utente utente, String dataN) {
+        utente.setDataNascita(LocalDate.parse(dataN));
+    }
+
     public void addVoloPreferiti(Volo volo, String[] usernames) {
         System.out.println("ADD VOLO PREFERITI");
         Utente utente = null;
+
         try{
             utente = credentialsService.getUtenteByUsername(usernames[0]);
         }
         catch (Exception e){
             utente = credentialsService.getUtenteByUsername(usernames[1]);
         }
-        /*if(utente.getPreferiti().isEmpty())
-            utente.getPreferiti().add(volo);
+
         utente.getPreferiti().add(volo);
-        */
-        System.out.println("ADD VOLO PREFERITI: " + utente);
     }
 
     @Transactional
-    public String[] getUsernames(UtenteOAuth2User authUser, UserDetails userDetails){
+    public String[] getUsernames(UtenteOAuth2User authUser, UserDetails userDetails) {
         String[] usernames = new String[2];
-        if(authUser != null)
+        if (authUser != null)
             usernames[0] = authUser.getLoginName();
-        if(userDetails != null)
+        if (userDetails != null)
             usernames[1] = userDetails.getUsername();
         return usernames;
     }

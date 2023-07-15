@@ -1,26 +1,17 @@
 package it.uniroma3.siw.controller;
 
-import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.model.Volo;
-import it.uniroma3.siw.repository.VoloRepository;
 import it.uniroma3.siw.service.AereoportoService;
-import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.UtenteService;
 import it.uniroma3.siw.service.VoloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -84,8 +75,7 @@ public class VoloController {
         UserDetails user = (UserDetails) model.getAttribute("userDetails");
         String[] usernames = utenteService.getUsernames(authUser, user);
 
-
-        System.out.println("VOLI AUTENTICATO ADD PREFERITI: " + idVolo + '\n' + usernames[0] + '\n' + usernames[1]);
+        System.out.println("VOLI AUTENTICATO ADD PREFERITI: " + idVolo + ' ' + usernames[0] + ' ' + usernames[1]);
         Volo volo = voloService.getVolo(idVolo);
         utenteService.addVoloPreferiti(volo, usernames);
         model.addAttribute("voli", voloService.getVoli());
