@@ -1,3 +1,4 @@
+
 package it.uniroma3.siw.repository;
 
 import it.uniroma3.siw.model.Aereoporto;
@@ -7,4 +8,7 @@ import java.util.List;
 
 public interface AereoportoRepository extends CrudRepository<Aereoporto, Long> {
     public List<Aereoporto> findAll();
+
+    public Aereoporto findByNome(String nome);
 }
+

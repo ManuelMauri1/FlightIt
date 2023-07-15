@@ -7,6 +7,7 @@ import lombok.*;
 import java.security.SecureRandom;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -24,8 +25,15 @@ public class Volo {
     private LocalDate dataPartenza;
     private Time oraPartenza;
     private Time oraArrivo;
-    private String aereoportoPartenza;
-    private String aereoportoArrivo;
+
+    @ManyToMany
+    private List<Utente> preferitiUtente;
+
+    @ManyToOne
+    private Aereoporto aereoportoPartenza;
+
+    @ManyToOne
+    private Aereoporto aereoportoArrivo;
 
     public Volo(){
         this.codiceVolo = generaCodiceVolo();
