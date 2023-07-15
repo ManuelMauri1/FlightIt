@@ -12,5 +12,10 @@
       In seguito sarà presentata la lista dei voli che l'utente ha deciso di salvarsi come preferiti.
       -->
 <h1>AREA UTENTE</h1>
+    <header>
+        <span th:if="${authUser}" th:text="${authUser.username}"></span>
+        <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
+        <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
+    </header>
 </body>
 </html>

@@ -5,7 +5,11 @@
     <title>Aggiungi Volo</title>
 </head>
 <body>
-
+<header>
+    <span th:if="${authUser}" th:text="${authUser.username}"></span>
+    <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
+    <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
+</header>
 <!-- Pagina con form di inserimento dei dati del volo, in cui saranno per forza inseriti tutti.
 Sotto le form sarà presente un bottone per confermare l'inserimento o per annullarlo-->
 <form th:action="@{/admin/nuovoVolo}" method="post" th:object="${volo}">
