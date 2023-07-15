@@ -11,13 +11,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VoloService {
     @Autowired
     private VoloRepository voloRepository;
+    @Autowired
+    private AereoportoService aereoportoService;
 
     @Transactional
     public List<Volo> getVoli() {
@@ -40,8 +44,9 @@ public class VoloService {
         if (voloEsistente(volo.getCodiceVolo(), dataP)) {
             volo.setCodiceVolo(Volo.generaCodiceVolo());
         }
-        volo.setAereoportoArrivo(aereoportoA);
-        volo.setAereoportoPartenza(aereoportoP);
+
+        volo.setAereoportoArrivo(aereoportoService.getAereoportoByNome(aereoportoA));
+        volo.setAereoportoPartenza(aereoportoService.getAereoportoByNome(aereoportoP));
         volo.setDataPartenza(dataP);
         volo.setOraPartenza(parseOra(volo, oraP));
         volo.setOraArrivo(parseOra(volo, oraA));
@@ -72,5 +77,24 @@ public class VoloService {
 
     public Volo getVolo(Long id) {
         return voloRepository.findById(id).get();
+    }
+
+    public List<Volo> getVoliDaId(List<Long> voliId) {
+        List<Volo> voli = new ArrayList<>();
+        for (Long voloId : voliId) {
+            voli.add(getVolo(voloId));
+        }
+        return voli;
+    }
+
+    public List<Volo> getVoliNonPreferiti(List<Volo> preferiti) {
+        List<Long> preferitiId = new ArrayList<>();
+        for (Volo preferito: preferiti) {
+            preferitiId.add(preferito.getId());
+        }
+        if(preferitiId.isEmpty())
+            return getVoli();
+        else
+            return voloRepository.findAllByIdNotIn(preferitiId);
     }
 }
