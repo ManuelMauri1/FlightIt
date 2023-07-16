@@ -1,40 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dettaglio Volo</title>
+    <link href="/css/styleLogin.css?" rel="stylesheet"/>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Per le animazioni --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2c740d50fa.js" crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Lato:wght@300&family=Merriweather:ital,wght@1,300&family=Patua+One&family=Rubik&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>FlightIt - Inserisci Volo</title>
 </head>
 <body>
-
-<!-- Nella pagina saranno inseriti tutti i dettagli più specifici di un determinato volo. I valori mostrati sono:
-    - Partenza dettagliata
-    - Arrivo dettagliato
-    - Orari
-    - Mappa di completamento
-    - E altro...
-
-    Se sei admin, verrà mostrato anche il bottone "Modifica" per modificare il volo
--->
-
-<div th:if="${volo}" th:object="${volo}">
-    <div>
-        <h1 th:text=" 'Codice volo: ' + *{codiceVolo}"></h1>
-        <div>
-            Aereoporto di imbarco:
-            <span th:text="*{aereoportoPartenza.nome}"></span>
+<!-- Navbar -->
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <img class="navbar-brand img-fluid" src="/images/logo-siw.png" href="/" width="15%"/>
+        <div th:if="${userDetails}">
+            <span class="username-logged" id="welcome-text"
+                  th:text="'Hi, ' + ${userDetails.username}"></span>
         </div>
-        <div>
-            Aereoporto di sbarco:
-            <span th:text="*{aereoportoArrivo.nome}"></span>
+        <div th:if="${authUser}">
+            <span class="username-logged" id="welcome-text-oauth"
+                  th:text="'Hi, ' + ${authUser.username}"></span>
         </div>
-        <div>
-            Data: <span th:text="*{dataPartenza}"></span>
-            Ora d'imbarco: <span th:text="*{oraPartenza}"></span>
-            Ora di sbarco: <span th:text="*{oraArrivo}"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="mr-auto"></div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/voli">Voli</a>
+                <a class="nav-item nav-link" href="/autenticato/areaUtente">Profilo</a>
+                <div class="nav-item  log-btn">
+                    <a class="btn btn-danger my-2 my-sm-0" type="submit" href="/logout">Logout
+                    </a>
+                </div>
+            </div>
         </div>
+    </nav>
+</header>
+
+<div class="panel">
+    <div th:if="${volo}" th:object="${volo}">
+
+        <label> Codice volo </label>
+        <span>
+            <div class="form-field">
+                <p th:text="*{codiceVolo}" > CODICE VOLO </p>
+            </div>
+        </span>
+
+        <label>  Aereoporto di partenza </label>
+        <span>
+            <div class="form-field">
+                <p th:text="*{aereoportoPartenza.nome}" > A P </p>
+            </div>
+        </span>
+
+        <label>  Aereoporto di arrivo </label>
+        <span>
+            <div class="form-field">
+                <p th:text="*{aereoportoArrivo.nome}" > A A </p>
+            </div>
+        </span>
+
+        <label> Data partenza </label>
+        <span>
+            <div class="form-field">
+                <p th:text="*{dataPartenza}" > D </p>
+            </div>
+        </span>
+
+        <label> Ora d'imbarco </label>
+        <span>
+            <div class="form-field">
+                <p th:text="*{oraPartenza}" > D </p>
+            </div>
+        </span>
+
+        <label> Ora di arrivo </label>
+        <span>
+            <div class="form-field">
+                <p th:text="*{oraArrivo}" > D </p>
+            </div>
+        </span>
     </div>
 </div>
-
 <div th:unless="${volo}">Volo non presente</div>
 </body>
 </html>
