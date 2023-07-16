@@ -75,38 +75,44 @@
     </nav>
 </header>
 
-<div th:each="volo : ${voli}">
-    <div class="card l-bg-orange voli-card">
-        <div class="card-statistic-3 p-4" style="">
-            <div class="card-icon card-icon-large"><i class="fas fa-light fa-plane-departure"></i>"></div>
-            <div class="mb-4">
-                <h5 class="card-title mb-0"
-                    th:text="${volo.aereoportoPartenza.nome} + ' - ' + ${volo.aereoportoArrivo.nome} + ' (' + ${volo.dataPartenza} + ')'">Revenue Today</h5>
-            </div>
+<div class="row">
+    <div th:each="volo : ${preferiti}">
+        <div class="card l-bg-orange voli-card">
+            <div class="card-statistic-3 p-4" style="">
+                <div class="card-icon card-icon-large"><i class="fas fa-light fa-plane-departure"></i>"></div>
+                <div class="mb-4">
+                    <h5 class="card-title mb-0"
+                        th:text="${volo.aereoportoPartenza.nome} + ' - ' + ${volo.aereoportoArrivo.nome} + ' (' + ${volo.dataPartenza} + ')'">
+                        Revenue Today</h5>
+                </div>
 
-            <div class="row align-items-center mb-2 d-flex">
-                <div class="col-8">
-                    <h6 class="d-flex align-items-center mb-0" th:text="${volo.oraPartenza}">
-                        $11.61k
-                    </h6>
-                    <h6 class="d-flex align-items-center mb-0" th:text="${volo.oraArrivo}"></h6>
+                <div class="row align-items-center mb-2 d-flex">
+                    <div class="col-8">
+                        <h6 class="d-flex align-items-center mb-0" th:text="${volo.oraPartenza}">
+                            $11.61k
+                        </h6>
+                        <h6 class="d-flex align-items-center mb-0" th:text="${volo.oraArrivo}"></h6>
+                    </div>
+                    <div class="col-4 text-right">
+                        <span th:if="${!volo.checkTempo()}">2.5% <i class="fa fa-arrow-up"></i></span>
+                    </div>
                 </div>
-                <div class="col-4 text-right">
-                    <span th:if="${!volo.checkTempo()}">2.5% <i class="fa fa-arrow-up"></i></span>
+                <!-- TODO: fare la percentuale e la barra di ricerca dinamiche -->
+                <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                    <div class="progress-bar l-bg-orange-dark" role="progressbar" data-width="25%"
+                         aria-valuemin="0" aria-valuemax="100"
+                         th:style="'width:' + ${volo.calcoloTempoPartenza} + '%;'"></div>
                 </div>
             </div>
-            <!-- TODO: fare la percentuale e la barra di ricerca dinamiche -->
-            <div class="progress mt-1 " data-height="8" style="height: 8px;">
-                <div class="progress-bar l-bg-orange-dark" role="progressbar" data-width="25%"
-                      aria-valuemin="0" aria-valuemax="100" th:style="${volo.calcoloTempoPartenza}"></div>
+            <div class="card-footer">
+                <a class="btn btn-outline-warning" th:href="@{'autenticato/volo/' + ${volo.id}}">Altro</a>
+                <a th:href="@{'/autenticato/voli/addPreferiti/' + ${volo.id}}" onclick="like()"><i
+                        class="fa-light fa-heart fa-xl"></i></a>
             </div>
-        </div>
-        <div class="card-footer">
-            <a class="btn btn-outline-warning" th:href="@{ 'autenticato/volo/' + ${volo.id}}">Altro</a>
-            <a th:href="@{'/autenticato/voli/addPreferiti/' + ${volo.id}}" onclick="like()"></a><i class></i>
         </div>
     </div>
 </div>
+
 
 </body>
 </html>
