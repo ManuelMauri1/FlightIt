@@ -57,51 +57,49 @@
     </nav>
 </header>
 
-<div class="panel">
-    <div th:if="${volo}" th:object="${volo}">
+<div class="panel" style="align-content: center">
+    <span th:if="${volo}" th:object="${volo}">
 
-        <label> Codice volo </label>
+        <h2 th:text="'Dettagli volo ' + *{codiceVolo}"></h2>
+
+        <br>
+            <span>
+                <i class="fa-solid fa-plane-departure fa-xl"></i>
+                <label th:text="*{aereoportoPartenza.nome}"> A A </label>
+            </span>
+
+        <br>
+
+             <span>
+                <i class="fa-solid fa-plane-arrival fa-xl"></i>
+                <label th:text="*{aereoportoArrivo.nome}"> A A </label>
+            </span>
+
+        <br>
+
         <span>
-            <div class="form-field">
-                <p th:text="*{codiceVolo}" > CODICE VOLO </p>
-            </div>
+            <i class="fa-solid fa-calendar fa-xl"></i>
+                <label th:text="*{dataPartenza}"> A A </label>
         </span>
 
-        <label>  Aereoporto di partenza </label>
+
+        <br>
+
+
         <span>
-            <div class="form-field">
-                <p th:text="*{aereoportoPartenza.nome}" > A P </p>
-            </div>
+            <i class="fa-solid fa-clock fa-xl"></i>
+                <label th:text="*{oraPartenza}"> A A </label>
         </span>
 
-        <label>  Aereoporto di arrivo </label>
-        <span>
-            <div class="form-field">
-                <p th:text="*{aereoportoArrivo.nome}" > A A </p>
-            </div>
-        </span>
 
-        <label> Data partenza </label>
-        <span>
-            <div class="form-field">
-                <p th:text="*{dataPartenza}" > D </p>
-            </div>
-        </span>
+        <br>
 
-        <label> Ora d'imbarco </label>
-        <span>
-            <div class="form-field">
-                <p th:text="*{oraPartenza}" > D </p>
-            </div>
-        </span>
 
-        <label> Ora di arrivo </label>
         <span>
-            <div class="form-field">
-                <p th:text="*{oraArrivo}" > D </p>
-            </div>
+            <i class="fa-regular fa-clock fa-xl"></i>
+                <label th:text="*{oraArrivo}"> A A </label>
         </span>
-    </div>
+</span>
 </div>
 <div th:unless="${volo}">Volo non presente</div>
 </body>
