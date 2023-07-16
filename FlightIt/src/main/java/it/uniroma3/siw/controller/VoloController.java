@@ -68,8 +68,15 @@ public class VoloController {
         return modificaVolo(model);
     }
 
+    @GetMapping("/admin/cancellaVolo/{id}")
+    public String cancellaVolo(@PathVariable("id") Long voloId, Model model) {
+        aereoportoService.cancellaVolo(voloService.getVolo(voloId));
+        voloService.cancellaVolo(voloId);
+        return modificaVolo(model);
+    }
+
     /*LOGGATI*/
-    @GetMapping("/autenticato/volo/{id}")
+    @PostMapping("/autenticato/volo/{id}")
     public String volo(@PathVariable("id") Long id, Model model) {
         model.addAttribute("volo", voloService.getVolo(id));
         return "/autenticato/volo";

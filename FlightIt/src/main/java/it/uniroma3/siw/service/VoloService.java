@@ -89,36 +89,40 @@ public class VoloService {
 
     public List<Volo> getVoliNonPreferiti(List<Volo> preferiti) {
         List<Long> preferitiId = new ArrayList<>();
-        for (Volo preferito: preferiti) {
+        for (Volo preferito : preferiti) {
             preferitiId.add(preferito.getId());
         }
-        if(preferitiId.isEmpty())
+        if (preferitiId.isEmpty())
             return getVoli();
         else
             return voloRepository.findAllByIdNotIn(preferitiId);
     }
 
     public Float calcoloTempoVolo(Volo volo) {
-    	Float tempoVolo = (float) 0;
-    	Float oraPartenza = (float) volo.getOraPartenza().getTime();
-    	Float oraArrivo = (float) volo.getOraArrivo().getTime();
-    	tempoVolo = oraArrivo - oraPartenza;
-    	return tempoVolo;
+        Float tempoVolo = (float) 0;
+        Float oraPartenza = (float) volo.getOraPartenza().getTime();
+        Float oraArrivo = (float) volo.getOraArrivo().getTime();
+        tempoVolo = oraArrivo - oraPartenza;
+        return tempoVolo;
     }
 
 
     public Float calcoloTempoDallaPartenzaPercentuale(Volo volo) {
-    	Float tempoVolo = calcoloTempoVolo(volo);
-    	Float oraPartenza = (float) volo.getOraPartenza().getTime();
-    	Float oraAttuale = (float) new Date().getTime();
-    	Float tempoAttuale = oraAttuale - oraPartenza;
-    	return (tempoAttuale/tempoVolo)*100;
+        Float tempoVolo = calcoloTempoVolo(volo);
+        Float oraPartenza = (float) volo.getOraPartenza().getTime();
+        Float oraAttuale = (float) new Date().getTime();
+        Float tempoAttuale = oraAttuale - oraPartenza;
+        return (tempoAttuale / tempoVolo) * 100;
     }
 
     public Boolean checkPartenzaVolo(Volo volo) {
-    	Float oraPartenza = (float) volo.getOraPartenza().getTime();
-    	Float oraAttuale = (float) new Date().getTime();
-    	Float tempoAttuale = oraAttuale - oraPartenza;
+        Float oraPartenza = (float) volo.getOraPartenza().getTime();
+        Float oraAttuale = (float) new Date().getTime();
+        Float tempoAttuale = oraAttuale - oraPartenza;
         return tempoAttuale < 0;
+    }
+
+    public void cancellaVolo(Long voloId) {
+        voloRepository.deleteById(voloId);
     }
 }

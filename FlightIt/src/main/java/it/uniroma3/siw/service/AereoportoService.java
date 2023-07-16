@@ -54,4 +54,8 @@ public class AereoportoService {
         aereoportoP.getVoliInUscita().remove(volo);
     }
 
+    public void cancellaVolo(Volo volo) {
+        eliminaVoloInUscita(volo, volo.getAereoportoPartenza());
+        eliminaVoloInEntrata(volo, volo.getAereoportoArrivo());
+    }
 }
