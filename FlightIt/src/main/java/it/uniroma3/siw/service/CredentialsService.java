@@ -28,6 +28,11 @@ public class CredentialsService {
         return result.orElse(null);
     }
 
+    public Utente getUtenteByUsername(String username){
+        Credentials credentials = getCredentialsByUsername(username);
+        return credentials.getUtente();
+    }
+
     @Transactional
     public Credentials saveCredentials(Credentials credentials) {
         credentials.setRuolo(Credentials.RUOLO_AUTORIZZATO);
@@ -55,7 +60,6 @@ public class CredentialsService {
 
     @Transactional
     public void saveCredentialsOAuthLogin(String loginName, String displayName, AuthProvider provider){
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN");
         Credentials credentials = new Credentials();
         Utente utente = new Utente();
         utenteService.setNome(utente, displayName);
@@ -68,10 +72,9 @@ public class CredentialsService {
 
     @Transactional
     public void saveCredentialsLocalLogin(Utente utente, Credentials credentials, AuthProvider provider){
-        utenteService.saveUser(utente);
+        Utente utenteSalvato = utenteService.saveUser(utente);
         setProvider(credentials, provider);
-        setUser(credentials, utente);
+        setUser(credentials, utenteSalvato);
         saveCredentials(credentials);
-        System.out.println("SAVE CREDENTIALS OAUTHLOGIN: " + credentials + ' ' + utente);
     }
 }

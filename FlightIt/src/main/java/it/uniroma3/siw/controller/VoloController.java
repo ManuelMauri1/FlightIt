@@ -1,23 +1,18 @@
 package it.uniroma3.siw.controller;
 
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.UtenteOAuth2User;
 import it.uniroma3.siw.model.Volo;
-import it.uniroma3.siw.repository.VoloRepository;
 import it.uniroma3.siw.service.AereoportoService;
-import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.UtenteService;
 import it.uniroma3.siw.service.VoloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,11 +21,19 @@ public class VoloController {
     private VoloService voloService;
     @Autowired
     private AereoportoService aereoportoService;
+    @Autowired
+    private UtenteService utenteService;
 
     /*NON LOGGATI*/
     @GetMapping("/voli")
     public String voli(Model model) {
-        model.addAttribute("voli", voloService.getVoli());
+        String[] usernames = getUsernames(model);
+        List<Volo> preferiti = utenteService.getPreferiti(usernames);
+        if(usernames[0] == null && usernames[1] == null)
+            model.addAttribute("voli", voloService.getVoli());
+        else
+            model.addAttribute("voli", voloService.getVoliNonPreferiti(preferiti));
+        model.addAttribute("preferiti", preferiti);
         return "voli.html";
     }
 
@@ -48,7 +51,8 @@ public class VoloController {
                             @RequestParam("aereoportoA") String aereoportoA, @RequestParam("dataP") LocalDate dataP,
                             @RequestParam("oraP") String oraP, @RequestParam("oraA") String oraA, Model model) {
         voloService.salvaNuovoVolo(volo, aereoportoP, aereoportoA, dataP, oraP, oraA);
-        return voli(model);
+        aereoportoService.aggiungiVolo(volo, aereoportoA, aereoportoP);
+        return volo(volo.getId(), model);
     }
 
     @GetMapping("/admin/modificaVolo")
@@ -58,17 +62,10 @@ public class VoloController {
     }
 
     @PostMapping("/admin/cancellaVoli")
-    public String cancellaVoli(@RequestParam("elimina")List<Long> voliId, Model model){
+    public String cancellaVoli(@RequestParam("elimina") List<Long> voliId, Model model) {
+        aereoportoService.cancellaVoli(voloService.getVoliDaId(voliId));
         voloService.cancellaVoli(voliId);
-
         return modificaVolo(model);
-    }
-
-    @PostMapping("/admin/cancellaVolo/{id}")
-    public String cancellaVolo(@PathVariable("id")Long voloId, Model model){
-        voloService.cancellaVolo(voloId);
-        model.addAttribute("voli", voloService.getVoli());
-        return "admin/modificaVolo";
     }
 
     /*LOGGATI*/
@@ -78,4 +75,24 @@ public class VoloController {
         return "/autenticato/volo";
     }
 
+    @GetMapping("/autenticato/voli/addPreferiti/{idVolo}")
+    public String addPreferiti(@PathVariable("idVolo") Long idVolo, Model model) {
+        Volo volo = voloService.getVolo(idVolo);
+        String[] usernames = getUsernames(model);
+        utenteService.addVoloPreferiti(volo, usernames);
+        return voli(model);
+    }
+
+    @GetMapping("/autenticato/voli/removePreferiti/{idVolo}")
+    public String removePreferiti(@PathVariable("idVolo") Long idVolo, Model model){
+        utenteService.removeVoloPreferiti(voloService.getVolo(idVolo), getUsernames(model));
+        return voli(model);
+    }
+
+    /* METODI GENERICI */
+    public String[] getUsernames(Model model) {
+        Credentials authUser = (Credentials) model.getAttribute("authUser");
+        UserDetails localUser = (UserDetails) model.getAttribute("userDetails");
+        return utenteService.getUsernames(authUser, localUser);
+    }
 }

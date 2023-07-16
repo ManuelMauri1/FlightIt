@@ -1,4 +1,3 @@
-
 package it.uniroma3.siw.repository;
 
 import it.uniroma3.siw.model.Aereoporto;
@@ -11,4 +10,3 @@ public interface AereoportoRepository extends CrudRepository<Aereoporto, Long> {
 
     public Aereoporto findByNome(String nome);
 }
-
