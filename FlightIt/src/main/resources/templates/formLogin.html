@@ -65,7 +65,11 @@
                 <a class="nav-item nav-link" href="/voli">Voli</a>
                 <a class="nav-item nav-link" href="/...">Profilo</a> <!-- aggiungere link al profilo -->
                 <div class="nav-item log-btn">
-                    <a class="btn btn-success my-2 my-sm-0" type="submit" href="/logout">Login
+                    <a class="btn btn-danger my-2 my-sm-0" th:if="${authUser != null || userDetails != null}"
+                       type="submit" href="/logout">Logout
+                    </a>
+                    <a class="btn btn-success my-2 my-sm-0" th:if="${authUser == null && userDetails == null}"
+                       type="submit" href="/login">Login
                     </a>
                 </div>
             </div>

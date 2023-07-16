@@ -58,8 +58,12 @@
                 <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="/movies">Film</a>
                 <a class="nav-item nav-link" href="/artists">Artisti</a>
-                <div class="nav-item  log-btn">
-                    <a class="btn btn-danger my-2 my-sm-0" type="submit" href="/logout">Logout
+                <div class="nav-item log-btn">
+                    <a class="btn btn-danger my-2 my-sm-0" th:if="${authUser != null || userDetails != null}"
+                       type="submit" href="/logout">Logout
+                    </a>
+                    <a class="btn btn-success my-2 my-sm-0" th:if="${authUser == null && userDetails == null}"
+                       type="submit" href="/login">Login
                     </a>
                 </div>
             </div>

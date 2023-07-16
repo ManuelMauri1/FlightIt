@@ -22,7 +22,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>SiwMovie - Inserisci Film</title>
+    <title>SiwMovie - Inserisci Volo</title>
 </head>
 <body>
 <!-- Navbar -->
@@ -47,8 +47,12 @@
                 <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="/voli">Voli</a>
                 <a class="nav-item nav-link" href="/areaUtente">Profilo</a>
-                <div class="nav-item  log-btn">
-                    <a class="btn btn-danger my-2 my-sm-0" type="submit" href="/logout">Logout
+                <div class="nav-item log-btn">
+                    <a class="btn btn-danger my-2 my-sm-0" th:if="${authUser != null || userDetails != null}"
+                       type="submit"><a href="/logout">Logout</a>
+                    </a>
+                    <a class="btn btn-success my-2 my-sm-0" th:if="${authUser == null && userDetails == null}"
+                       type="submit"><a href="/login">Login</a>
                     </a>
                 </div>
             </div>

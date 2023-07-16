@@ -45,10 +45,10 @@
                 <a class="nav-item nav-link" href="/artists">Artisti</a>
                 <div class="nav-item log-btn">
                     <a class="btn btn-danger my-2 my-sm-0" th:if="${authUser != null || userDetails != null}"
-                       type="submit"><a href="/logout">Logout</a>
+                       type="submit" href="/logout">Logout
                     </a>
                     <a class="btn btn-success my-2 my-sm-0" th:if="${authUser == null && userDetails == null}"
-                       type="submit"><a href="/login">Login</a>
+                       type="submit" href="/login">Login
                     </a>
                 </div>
             </div>
