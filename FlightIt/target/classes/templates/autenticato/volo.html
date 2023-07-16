@@ -63,42 +63,42 @@
         <label> Codice volo </label>
         <span>
             <div class="form-field">
-                <p th:text="' ' + *{codiceVolo}" > CODICE VOLO </p>
+                <p th:text="*{codiceVolo}" > CODICE VOLO </p>
             </div>
         </span>
 
         <label>  Aereoporto di partenza </label>
         <span>
             <div class="form-field">
-                <p th:text=" ' '+ *{aereoportoPartenza.nome}" > A P </p>
+                <p th:text="*{aereoportoPartenza.nome}" > A P </p>
             </div>
         </span>
 
         <label>  Aereoporto di arrivo </label>
         <span>
             <div class="form-field">
-                <p th:text=" ' '+ *{aereoportoArrivo.nome}" > A A </p>
+                <p th:text="*{aereoportoArrivo.nome}" > A A </p>
             </div>
         </span>
 
         <label> Data partenza </label>
         <span>
             <div class="form-field">
-                <p th:text=" ' '+ *{dataPartenza}" > D </p>
+                <p th:text="*{dataPartenza}" > D </p>
             </div>
         </span>
 
         <label> Ora d'imbarco </label>
         <span>
             <div class="form-field">
-                <p th:text=" ' '+ *{oraPartenza}" > D </p>
+                <p th:text="*{oraPartenza}" > D </p>
             </div>
         </span>
 
         <label> Ora di arrivo </label>
         <span>
             <div class="form-field">
-                <p th:text=" ' '+ *{oraArrivo}" > D </p>
+                <p th:text="*{oraArrivo}" > D </p>
             </div>
         </span>
     </div>
