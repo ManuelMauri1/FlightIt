@@ -60,7 +60,15 @@ public class VoloController {
     @PostMapping("/admin/cancellaVoli")
     public String cancellaVoli(@RequestParam("elimina")List<Long> voliId, Model model){
         voloService.cancellaVoli(voliId);
+
         return modificaVolo(model);
+    }
+
+    @PostMapping("/admin/cancellaVolo/{id}")
+    public String cancellaVolo(@PathVariable("id")Long voloId, Model model){
+        voloService.cancellaVolo(voloId);
+        model.addAttribute("voli", voloService.getVoli());
+        return "admin/modificaVolo";
     }
 
     /*LOGGATI*/

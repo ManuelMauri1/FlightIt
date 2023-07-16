@@ -55,29 +55,49 @@
         </div>
     </nav>
 </header>
-
-<h1>VOLI</h1>
 <!-- La pagina conterrà delle form per modificare tutte le informazioni riguardanti un singolo volo.
  le info sono le stesse conenute all'interno del dettagio volo, con l'aggiunta della modifica dell'orario.
  Sotto le informazioni saranno presenti dei bottoni per confermare l'inserimento e uno per eliminare definitivamente il volo.
  -->
-<div th:if="${voli.isEmpty()}">Non ci sono voli nel sistema</div>
 
-<form th:action="@{/admin/cancellaVoli}" method="post" th:object="${voli}">
-    <ul>
-        <li th:each="volo : ${voli}">
-            <div>
-                <div>
-                    <div th:text="${volo.aereoportoPartenza.nome} + ' -> ' + ${volo.aereoportoArrivo.nome}">
-                        Da -> A
-                    </div>
-                    <input type="checkbox" name="elimina" th:value="${volo.id}">
+<div class="container-box panel">
+    <div class="container">
+        <!--- ATTORI FILM --->
+        <h1 class="text-center">Attori nel film</h1><br>
+        <div th:if="${voli.isEmpty()}">Non ci sono attori inseriti</div>
+        <div class="table-responsive w-100 d-block d-md-table">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Partenza</th>
+                    <th scope="col">Arrivo</th>
+                    <th scope="col">Giorno</th>
+                    <th scope="col">Parte alle</th>
+                    <th scope="col">Arriva alle</th>
+                </tr>
+                </thead>
+                <tbody>
+                <div th:each="volo : ${voli}">
+                    <tr>
+                        <th scope="row" th:text="${volo.id}">id</th>
+                        <td th:text="${volo.aereoportoPartenza.nome}"></td>
+                        <td th:text="${volo.aereoportoArrivo.nome}"></td>
+                        <td th:text="${volo.dataPartenza}">Mario</td>
+                        <td th:text="${volo.oraPartenza}">Rossi</td>
+                        <td th:text="${volo.oraArrivo}">Rossi</td>
+                        <td>
+                            <a th:href="@{'/admin/cancellaVoli'}">
+                                <i class="fa-solid fa-square-minus fa-xl"></i>
+                            </a>
+                        </td>
+                    </tr>
                 </div>
-            </div>
-        </li>
-    </ul>
-    <button type="submit">Elimina selezionati</button>
-</form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

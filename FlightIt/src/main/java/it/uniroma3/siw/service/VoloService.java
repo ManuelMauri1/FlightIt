@@ -75,6 +75,10 @@ public class VoloService {
         }
     }
 
+    public void cancellaVolo(Long voloId) {
+        voloRepository.deleteById(voloId);
+    }
+
     public Volo getVolo(Long id) {
         return voloRepository.findById(id).get();
     }
@@ -97,4 +101,6 @@ public class VoloService {
         else
             return voloRepository.findAllByIdNotIn(preferitiId);
     }
+
+
 }
