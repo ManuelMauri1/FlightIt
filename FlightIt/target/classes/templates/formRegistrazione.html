@@ -103,7 +103,7 @@
                               th:errors="${credentials.password}"
                               th:style="'color:red'"></span>
                     </div>
-                </div >
+                </div>
                 <div th:object="${user}">
                     <div th:if="${#fields.hasGlobalErrors()}">
                         <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">
@@ -114,7 +114,8 @@
                               th:style="'color:red'"></span>
                     </div>
                     <div class="form-field">
-                        <input type="text" maxlength="30" class="cognome" required th:field="*{cognome}" placeholder="Cognome"/>
+                        <input type="text" maxlength="30" class="cognome" required th:field="*{cognome}"
+                               placeholder="Cognome"/>
                         <span class="cognome" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"
                               th:style="'color:red'"></span>
                     </div>
@@ -126,14 +127,9 @@
                 </div>
             </div>
             <br>
-            <span>
             <div>
                 <a class="btn btn-outline-success" type="submit">Registra</a>
             </div>
-            <div>
-                <a class="btn btn-outline-danger" type="submit" href="/login">Annulla</a>
-            </div>
-            </span>
         </div>
     </form>
 </div>
