@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -76,10 +77,10 @@ public class VoloController {
     }
 
     /*LOGGATI*/
-    @PostMapping("/autenticato/volo/{id}")
+    @GetMapping("/autenticato/volo/{id}")
     public String volo(@PathVariable("id") Long id, Model model) {
         model.addAttribute("volo", voloService.getVolo(id));
-        return "/autenticato/volo";
+        return "autenticato/volo";
     }
 
     @GetMapping("/autenticato/voli/addPreferiti/{idVolo}")
@@ -103,7 +104,4 @@ public class VoloController {
         return utenteService.getUsernames(authUser, localUser);
     }
 
-    public Boolean checkVoloPartito(Volo volo) {
-        return voloService.checkPartenzaVolo(volo);
-    }
 }

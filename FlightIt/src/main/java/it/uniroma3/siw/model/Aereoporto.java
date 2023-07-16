@@ -23,4 +23,14 @@ public class Aereoporto {
 
     @OneToMany(mappedBy = "aereoportoPartenza")
     private List<Volo> voliInUscita;
+
+    @Override
+    public String toString() {
+        return "Aereoporto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", voliInEntrata=" + voliInEntrata +
+                ", voliInUscita=" + voliInUscita +
+                '}';
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.security.SecureRandom;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -28,7 +29,6 @@ public class Volo {
     private LocalDate dataPartenza;
     private Time oraPartenza;
     private Time oraArrivo;
-    private Float tempoVolo;
 
     @ManyToMany
     private List<Utente> preferitiUtente;
@@ -66,6 +66,27 @@ public class Volo {
     @Override
     public int hashCode() {
         return Objects.hash(getCodiceVolo(), getDataPartenza());
+    }
+
+    public boolean checkTempo() {
+        return this.oraPartenza.before(this.oraArrivo);
+    }
+
+    public Float calcoloTempoVolo() {
+        float tempoVolo;
+        Float oraPartenza = (float) this.getOraPartenza().getTime();
+        Float oraArrivo = (float) this.getOraArrivo().getTime();
+        tempoVolo = oraArrivo - oraPartenza;
+        return tempoVolo;
+    }
+
+
+    public Float calcoloTempoPartenza() {
+        Float tempoVolo = calcoloTempoVolo();
+        Float oraPartenza = (float) this.getOraPartenza().getTime();
+        Float oraAttuale = (float) new Date().getTime();
+        Float tempoAttuale = oraAttuale - oraPartenza;
+        return (tempoAttuale / tempoVolo) * 100;
     }
 }
 
