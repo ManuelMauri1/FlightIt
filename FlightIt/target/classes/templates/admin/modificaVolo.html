@@ -87,7 +87,7 @@
                         <td th:text="${volo.oraPartenza}">Rossi</td>
                         <td th:text="${volo.oraArrivo}">Rossi</td>
                         <td>
-                            <a th:href="@{'/admin/cancellaVoli'}">
+                            <a th:href="@{'/admin/cancellaVolo/' + ${volo.id}}">
                                 <i class="fa-solid fa-square-minus fa-xl"></i>
                             </a>
                         </td>

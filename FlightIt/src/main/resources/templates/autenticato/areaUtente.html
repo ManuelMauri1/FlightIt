@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina Utente</title>
+    <link rel="stylesheet" href="/css/stileBottonePreferiti.css?version=2"/>
+    <!-- Per l'icona del cuore -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Per l'icona della freccia -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script type="text/javascript">
+        function like() {
+            var heartIcon = document.getElementById('heart-icon');
+            var button = document.querySelector('.like-button');
+            if (button.textContent === 'LIKE') {
+                button.textContent = 'LIKED';
+                heartIcon.classList.remove('bi-suit-heart');
+                heartIcon.classList.add('bi-suit-heart-fill');
+            } else {
+                button.textContent = 'LIKE';
+                heartIcon.classList.remove('bi-suit-heart-fill');
+                heartIcon.classList.add('bi-suit-heart');
+            }
+            button.disabled = false;
+        }
+    </script>
+</head>
+<body>
+
+<!-- All'inizio della pagina utente saranno presenti i dati dell'utente, in particolare nome, cognome, e
+ se abbiamo tempo immagine profilo.
+
+  In seguito sarà presentata la lista dei voli che l'utente ha deciso di salvarsi come preferiti.
+  -->
+<header>
+    <span th:if="${authUser}" th:text="${authUser.username}"></span>
+    <span th:if="${userDetails}" th:text="${userDetails.username}"></span>
+    <a th:if="${authUser != null || userDetails != null}" href="/logout">Logout</a>
+
+    <a href="/success" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+
+<div>
+    <h1>INFORMAZIONI PERSONALI</h1>
+    <div th:object="${credenziali}">
+        <div>
+            <label th:text="'Username utilizzato: ' + *{username}">Username</label>
+        </div>
+    </div>
+    <div th:object="${utente}">
+        <div>
+            <label th:text="'Nome inserito: ' + *{nome} + ' ' + *{cognome}">Nome Cognome</label>
+        </div>
+        <div>
+            <label th:text="'Data di nascita: ' + *{dataNascita}">Data Nascita</label>
+        </div>
+    </div>
+    <div>
+        <ul>
+            <li th:each="preferito : ${preferiti}">
+                <div th:object="${preferito}">
+                    <a th:href="@{'/autenticato/volo' + '/' + *{id}}"
+                       th:text="*{aereoportoPartenza.nome} + ' -> ' + *{aereoportoArrivo.nome}" class="volo">Da -> A</a>
+                    <a class="like-button" th:href="@{'/autenticato/voli/removePreferiti/' + *{id}}" onclick="like()">
+                        <i id="heart-icon" class="bi bi-suit-heart-fill"></i>
+                        LIKED
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
