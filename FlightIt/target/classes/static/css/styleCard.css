@@ -39,6 +39,7 @@
 
 
 .l-bg-orange {
-    background: linear-gradient(to right, #ff8008, #ffc837) !important;
+    background-image: url(../images/cardoboardBackground.jpg);
     color: #fff;
+    background-size: cover;
 }
