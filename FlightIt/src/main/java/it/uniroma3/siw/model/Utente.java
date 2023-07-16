@@ -7,10 +7,11 @@ import lombok.*;
 import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 public class Utente {
     @Id
@@ -21,8 +22,27 @@ public class Utente {
     private String cognome;
     private LocalDate dataNascita;
 
+    @ManyToMany(mappedBy = "preferitiUtente")
+    private List<Volo> preferiti;
+
+    public Utente(){
+        preferiti = new ArrayList<>();
+    }
+
     public Utente(String nome, String cognome){
+        this();
         setNome(nome);
         setCognome(cognome);
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", dataNascita=" + dataNascita +
+                ", preferiti=" + preferiti +
+                '}';
     }
 }
