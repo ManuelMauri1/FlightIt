@@ -1,8 +1,10 @@
 package it.uniroma3.siw.model;
 
+import it.uniroma3.siw.service.VoloService;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.security.SecureRandom;
 import java.sql.Time;
@@ -15,6 +17,7 @@ import java.util.Random;
 @Entity
 @AllArgsConstructor
 public class Volo {
+
     private static final int CODICE = 10;
     private static final String CARATTERI = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
@@ -25,6 +28,7 @@ public class Volo {
     private LocalDate dataPartenza;
     private Time oraPartenza;
     private Time oraArrivo;
+    private Float tempoVolo;
 
     @ManyToMany
     private List<Utente> preferitiUtente;
@@ -64,3 +68,4 @@ public class Volo {
         return Objects.hash(getCodiceVolo(), getDataPartenza());
     }
 }
+

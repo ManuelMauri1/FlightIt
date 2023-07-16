@@ -95,4 +95,8 @@ public class VoloController {
         UserDetails localUser = (UserDetails) model.getAttribute("userDetails");
         return utenteService.getUsernames(authUser, localUser);
     }
+
+    public Boolean checkVoloPartito(Volo volo) {
+        return voloService.checkPartenzaVolo(volo);
+    }
 }
