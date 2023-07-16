@@ -21,8 +21,6 @@ public class UtenteService {
     private UtenteRepository userRepository;
     @Autowired
     private CredentialsService credentialsService;
-    @Autowired
-    private VoloService voloService;
 
     @Transactional
     public void setNome(Utente utente, String nome) {
@@ -46,8 +44,17 @@ public class UtenteService {
         else
             utente = credentialsService.getUtenteByUsername(usernames[1]);
 
-        utente.getPreferiti().add(volo);
-        volo.getPreferitiUtente().add(utente);
+        List<Volo> utentePreferiti = utente.getPreferiti();
+        if(utentePreferiti.isEmpty())
+            utentePreferiti.add(volo);
+        else
+            utentePreferiti.add(volo);
+
+        List<Utente> voloPreferitiUtente = volo.getPreferitiUtente();
+        if(voloPreferitiUtente.isEmpty())
+            voloPreferitiUtente.add(utente);
+        else
+            voloPreferitiUtente.add(utente);
     }
 
     public void removeVoloPreferiti(Volo volo, String[] usernames) {

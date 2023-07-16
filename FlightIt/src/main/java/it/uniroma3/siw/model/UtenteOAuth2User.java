@@ -27,4 +27,11 @@ public class UtenteOAuth2User implements OAuth2User{
     }
 
     public String getLoginName(){return auth2User.getAttribute("login");}
+
+    @Override
+    public String toString() {
+        return "UtenteOAuth2User{" +
+                "auth2User=" + auth2User +
+                '}';
+    }
 }

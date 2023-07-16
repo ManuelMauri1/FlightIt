@@ -34,4 +34,15 @@ public class Utente {
         setNome(nome);
         setCognome(cognome);
     }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", dataNascita=" + dataNascita +
+                ", preferiti=" + preferiti +
+                '}';
+    }
 }

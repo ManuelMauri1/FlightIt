@@ -77,7 +77,9 @@ public class VoloController {
 
     @GetMapping("/autenticato/voli/addPreferiti/{idVolo}")
     public String addPreferiti(@PathVariable("idVolo") Long idVolo, Model model) {
-        utenteService.addVoloPreferiti(voloService.getVolo(idVolo), getUsernames(model));
+        Volo volo = voloService.getVolo(idVolo);
+        String[] usernames = getUsernames(model);
+        utenteService.addVoloPreferiti(volo, usernames);
         return voli(model);
     }
 

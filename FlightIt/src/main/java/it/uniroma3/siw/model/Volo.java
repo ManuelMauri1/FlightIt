@@ -7,6 +7,7 @@ import lombok.*;
 import java.security.SecureRandom;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -37,6 +38,7 @@ public class Volo {
 
     public Volo(){
         this.codiceVolo = generaCodiceVolo();
+        preferitiUtente = new ArrayList<>();
     }
 
     public static String generaCodiceVolo() {
@@ -62,5 +64,18 @@ public class Volo {
     @Override
     public int hashCode() {
         return Objects.hash(getCodiceVolo(), getDataPartenza());
+    }
+    @Override
+    public String toString() {
+        return "Volo{" +
+                "id=" + id +
+                ", codiceVolo='" + codiceVolo + '\'' +
+                ", dataPartenza=" + dataPartenza +
+                ", oraPartenza=" + oraPartenza +
+                ", oraArrivo=" + oraArrivo +
+                ", preferitiUtente=" + preferitiUtente +
+                ", aereoportoPartenza=" + aereoportoPartenza +
+                ", aereoportoArrivo=" + aereoportoArrivo +
+                '}';
     }
 }
